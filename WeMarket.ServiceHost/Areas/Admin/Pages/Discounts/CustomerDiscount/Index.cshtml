@@ -1,15 +1,17 @@
 ﻿@page
-@model WeMarket.ServiceHost.Areas.Pages.InventoryManagement.IndexModel
+@model WeMarket.ServiceHost.Areas.Admin.Pages.Discounts.CustomerDiscount.IndexModel
+@{
+}
 
 @{
-    ViewData["title"] = "مدیریت انبار";
+    ViewData["title"] = "مدیریت تخفیفات مشتریان";
 }
 
 <div class="row">
     <div class="col-sm-12">
         <h4 class="page-title pull-right">@ViewData["title"]</h4>
         <p class="pull-left">
-            <a class="btn btn-success btn-lg" href="#showmodal=@Url.Page("./Index", "Create")">ایجاد انبار جدید</a>
+            <a class="btn btn-success btn-lg" href="#showmodal=@Url.Page("./Index", "Create")">تعریف تخفیف مشتری</a>
         </p>
     </div>
 </div>
@@ -18,20 +20,28 @@
     <div class="col-md-12">
         <div class="panel panel-default">
             <div class="panel-heading">
-                <h3 class="panel-title">جستجو در انبار</h3>
+                <h3 class="panel-title">جستجو در تخفیفات مشتریان</h3>
             </div>
             <div class="panel-body">
                 <form class="form-inline" role="form" method="get">
                     <div class="form-group">
-                        <label class="sr-only" asp-for="SearchModel.ProductId"></label>
-                        <select class="form-control" asp-for="SearchModel.ProductId" asp-items="Model.Products">
-                            <option value="0">انتخاب محصول ...</option>
-                        </select>
+                        <label class="sr-only" asp-for="SearchModel.StartDate"></label>
+                        <input class="form-control persianDateInput" asp-for="SearchModel.StartDate">
+                    </div>
+                    <div class="form-group">
+                        <label class="sr-only" asp-for="SearchModel.EndDate"></label>
+                        <input class="form-control persianDateInput" asp-for="SearchModel.EndDate">
                     </div>
                     <div class="form-group">
                         <label class="sr-only" asp-for="SearchModel.MarketId"></label>
                         <select class="form-control" asp-for="SearchModel.MarketId" asp-items="Model.Markets">
                             <option value="0">انتخاب فروشگاه ...</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label class="sr-only" asp-for="SearchModel.ProductId"></label>
+                        <select class="form-control" asp-for="SearchModel.ProductId" asp-items="Model.Products">
+                            <option value="0">انتخاب محصول ...</option>
                         </select>
                     </div>
                     <button type="submit" class="btn btn-success waves-effect waves-light m-l-10">جستجو</button>
@@ -42,11 +52,11 @@
     </div>
 </div>
 
-<div class="row">
+<div class="row" id="ProductCategoriesDiv">
     <div class="col-md-12">
         <div class="panel panel-default">
             <div class="panel-heading">
-                <h3 class="panel-title">لیست انبار (@Model.Inventory.Count)</h3>
+                <h3 class="panel-title">لیست تخفیفات مشتریان (@Model.CustomerDiscounts.Count)</h3>
             </div>
             <div class="panel-body">
                 <div class="row">
@@ -55,41 +65,32 @@
                             <thead>
                                 <tr>
                                     <th>#</th>
+                                    <th>فروشگاه</th>
                                     <th>محصول</th>
-                                    <th>فروشگاه </th>
-                                    <th>قیمت</th>
-                                    <th>موجودی انبار</th>
-                                    <th>تاریخ ایجاد</th>
+                                    <th>درصد تخفیف</th>
+                                    <th>تاریخ شروع</th>
+                                    <th>تاریخ پایان</th>
+                                    <th>علت تخفیف</th>
+                                    <th>تاریخ تولید</th>
                                     <th>عملیات</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                @foreach (var item in Model.Inventory)
+                                @foreach (var item in Model.CustomerDiscounts)
                                 {
                                     <tr>
                                         <td>@item.Id</td>
+                                        <td>@item.Market</td>
                                         <td>@item.Product</td>
-                                        <td>@item.MarketId</td>
-                                        <td>@item.UnitPrice</td>
-                                        <td>@item.CurrentCount</td>
+                                        <td>@item.DiscountRate%</td>
+                                        <td>@item.StartDate</td>
+                                        <td>@item.EndDate</td>
+                                        <td>@item.Reason</td>
                                         <td>@item.CreationDate</td>
                                         <td>
                                             <a class="btn btn-warning waves-effect waves-light m-b-5"
-                                               href="#showmodal=@Url.Page("./Index", "Edit", new {id = item.Id})">
+                                               href="#showmodal=@Url.Page("./Index", "Edit", new { id = item.Id})">
                                                 <i class="fa fa-edit"></i> ویرایش
-                                            </a>
-                                            <a class="btn btn-success waves-effect waves-light m-b-5"
-                                               href="#showmodal=@Url.Page("./Index", "Increase", new {id = item.Id})">
-                                                <i class="fa fa-plus"></i> افزایش موجودی
-                                            </a>
-                                            <a class="btn btn-danger waves-effect waves-light m-b-5"
-                                               href="#showmodal=@Url.Page("./Index", "Reduce", new {id = item.Id})">
-                                                <i class="fa fa-minus"></i> کاهش موجودی
-                                            </a>
-                                            <a class="btn btn-primary waves-effect waves-light m-b-5"
-                                               href="#showmodal=@Url.Page("./Index", "Log", new {id = item.Id})"
-                                               onclick="$('.modal-dialog').css('width', '60%')">
-                                                <i class="fa fa-recycle"></i> مشاهده گردنش انبار
                                             </a>
                                         </td>
                                     </tr>
@@ -108,9 +109,8 @@
     <script src="~/adminTheme/assets/datatables/dataTables.bootstrap.js"></script>
 
     <script type="text/javascript">
-        $(document).ready(function() {
+        $(document).ready(function () {
             $('#datatable').dataTable();
         });
     </script>
-
 }

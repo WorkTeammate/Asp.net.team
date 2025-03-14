@@ -1,4 +1,6 @@
 
+using DiscountManagement.Application.Extentions;
+using DiscountManagement.Infrastructure.EFcore.Extentions;
 using InventoryManagement.Application.Extentions;
 using InventoryManagement.EfCore.Extentions;
 using ShopsManagement.Application.Extentions;
@@ -15,6 +17,12 @@ builder.Services.AddShopsMangementInfrastructureDependencies(builder.Configurati
 builder.Services.AddInventoryInfrastructureDependencies(builder.Configuration);
 builder.Services.AddInventoryManagementApplicationDependencies();
 //Inventory 
+
+//Discount 
+builder.Services.AddDiscountInfrastructureDependencies(builder.Configuration);
+builder.Services.AddDiscountApplicationDependencies();
+//Discount 
+
 
 // sevices inside of Extention
 

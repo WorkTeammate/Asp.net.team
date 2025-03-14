@@ -50,7 +50,6 @@ namespace ShopsManagement.Infrastructure.EFcore.Repository
             }).ToList();
         }
 
-
         public List<ProductViewModel> Search(ProductSearchModel searchModel)
         {
             var query = _context.Products.Include(x => x.Markets).Select(x => new ProductViewModel

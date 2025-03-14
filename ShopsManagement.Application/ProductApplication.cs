@@ -1,4 +1,5 @@
 ﻿using _0_Framework.Application;
+using Microsoft.EntityFrameworkCore;
 using ShopsManagement.Application.Contracts.Products;
 using ShopsManagement.Domain.ProductAgg;
 using System;

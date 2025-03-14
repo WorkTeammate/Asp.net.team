@@ -21,6 +21,8 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\DiscountManagement.Application\DiscountManagement.Application.csproj" />
+    <ProjectReference Include="..\DiscountManagement.Infrastructure.EFcore\DiscountManagement.Infrastructure.EFcore.csproj" />
     <ProjectReference Include="..\InventoryManagement.Application\InventoryManagement.Application.csproj" />
     <ProjectReference Include="..\ShopsManagement.Application.Contracts\ShopsManagement.Application.Contracts.csproj" />
     <ProjectReference Include="..\ShopsManagement.Application\ShopsManagement.Application.csproj" />
