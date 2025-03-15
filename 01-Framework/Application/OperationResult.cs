@@ -27,9 +27,5 @@ namespace _0_Framework.Application
             return this;
         }
 
-        public OperationResult Failed(object passwordsNotMatch)
-        {
-            throw new NotImplementedException();
-        }
     }
 }

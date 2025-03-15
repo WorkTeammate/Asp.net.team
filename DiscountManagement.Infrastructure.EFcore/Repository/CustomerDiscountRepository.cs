@@ -2,6 +2,7 @@
 using _0_Framework.Infrastructure;
 using DiscountManagement.Application.Contracts.CustomerDiscount;
 using DiscountManagement.Domain.CustomerDiscountAgg;
+using Microsoft.EntityFrameworkCore;
 using ShopsManagement.Domain.ProductAgg;
 using ShopsManagement.Infrastructure.EFcore;
 using System;
@@ -18,8 +19,8 @@ namespace DiscountManagement.Infrastructure.EFcore.Repository
         private readonly DiscountContext _discountContext;
         private readonly ShopsContext _shopsContext;
 
-        public CustomerDiscountRepository(DiscountContext discountContext
-            , ShopsContext shopsContext) : base(discountContext)
+
+        public CustomerDiscountRepository(DiscountContext discountContext, ShopsContext shopsContext) : base(discountContext)
         {
             _discountContext = discountContext;
             _shopsContext = shopsContext;

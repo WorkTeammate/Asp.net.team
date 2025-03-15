@@ -1,4 +1,7 @@
 
+using _0_Framework.Application;
+using AccountMaagement.Infrastructure.EFcore.Extentions;
+using AccountManagement.Application.Extentions;
 using DiscountManagement.Application.Extentions;
 using DiscountManagement.Infrastructure.EFcore.Extentions;
 using InventoryManagement.Application.Extentions;
@@ -7,6 +10,8 @@ using ShopsManagement.Application.Extentions;
 using ShopsManagement.Infrastructure.EFcore.Extentions;
 
 var builder = WebApplication.CreateBuilder(args);
+builder.Services.AddHttpContextAccessor();
+
 // sevices inside of Extention
 //Shops 
 builder.Services.AddShopsMangementApplicationDependencies();
@@ -22,6 +27,17 @@ builder.Services.AddInventoryManagementApplicationDependencies();
 builder.Services.AddDiscountInfrastructureDependencies(builder.Configuration);
 builder.Services.AddDiscountApplicationDependencies();
 //Discount 
+
+//Account 
+builder.Services.AddAccountApplicationDependencies();
+builder.Services.AddAccountInfrastructureDependencies(builder.Configuration);
+//Account 
+
+
+//Auth 
+builder.Services.AddTransient<IAuthHelper, AuthHelper>();
+builder.Services.AddSingleton<IPasswordHasher, PasswordHasher>();
+//Auth 
 
 
 // sevices inside of Extention

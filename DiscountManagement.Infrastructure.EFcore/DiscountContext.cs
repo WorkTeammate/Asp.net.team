@@ -5,10 +5,13 @@ namespace DiscountManagement.Infrastructure.EFcore
 {
     public class DiscountContext : DbContext
     {
-        public DbSet<CustomerDiscount> CustomerDiscount { get; set; }
-        public DiscountContext(DbContextOptions options) : base(options)
+        public DiscountContext(DbContextOptions<DiscountContext> options) : base(options)
         {
         }
+
+        public DbSet<CustomerDiscount> CustomerDiscount { get; set; }
+
+        
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.ApplyConfigurationsFromAssembly(typeof(CustomerDiscount).Assembly);
