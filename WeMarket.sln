@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.10.35122.118
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "0", "0", "{AFF8C751-2E4D-424F-8281-EC44B732A10D}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Market.ShopsManagement", "Market.ShopsManagement", "{AFF8C751-2E4D-424F-8281-EC44B732A10D}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "01-SM.Domain", "01-SM.Domain", "{99D1B894-3223-4BC7-80D7-CE9B1ABFF60C}"
 EndProject
@@ -56,6 +56,22 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DiscountManagement.Infrastructure.EFcore", "DiscountManagement.Infrastructure.EFcore\DiscountManagement.Infrastructure.EFcore.csproj", "{948354E8-1479-4555-9033-B4A143FBEFFF}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ShopsManagement.Configuration", "ShopManagement.Configuration\ShopsManagement.Configuration.csproj", "{4B0C5058-1E1D-4AF6-A1AB-FBD98796E641}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Market.BlogManagement", "Market.BlogManagement", "{C02082EB-B46E-4031-9D9B-B04FE556D7A6}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "01-BM.Domain", "01-BM.Domain", "{BB14B222-2D8C-4009-83C7-061D022768A3}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "02-BM.Application", "02-BM.Application", "{DE9C7981-0346-4F77-877A-A9F1B0307294}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BlogManagement.Domain", "BlogManagement.Domain\BlogManagement.Domain.csproj", "{5151E473-C2BE-4D1D-820E-78978AF7AE18}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BlogManagement.Application.Contracts", "BlogManagement.Application.Contracts\BlogManagement.Application.Contracts.csproj", "{96152217-E95F-4C67-92B9-DC29BE151CB4}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BlogManagement.Application", "BlogManagement.Application\BlogManagement.Application.csproj", "{5B06A322-57ED-4C4B-B53F-3A817DFB17BD}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "03-BM.Infrastructure", "03-BM.Infrastructure", "{6D19F361-7984-43D1-BC35-4811DE229CF1}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BlogManagament.Infrastructure.EfCore", "BlogManagament.Infrastructure.EfCore\BlogManagament.Infrastructure.EfCore.csproj", "{FC8A8929-6DE1-4B2C-90E4-1D7A715103BD}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -123,6 +139,22 @@ Global
 		{4B0C5058-1E1D-4AF6-A1AB-FBD98796E641}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{4B0C5058-1E1D-4AF6-A1AB-FBD98796E641}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{4B0C5058-1E1D-4AF6-A1AB-FBD98796E641}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5151E473-C2BE-4D1D-820E-78978AF7AE18}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5151E473-C2BE-4D1D-820E-78978AF7AE18}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5151E473-C2BE-4D1D-820E-78978AF7AE18}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5151E473-C2BE-4D1D-820E-78978AF7AE18}.Release|Any CPU.Build.0 = Release|Any CPU
+		{96152217-E95F-4C67-92B9-DC29BE151CB4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{96152217-E95F-4C67-92B9-DC29BE151CB4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{96152217-E95F-4C67-92B9-DC29BE151CB4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{96152217-E95F-4C67-92B9-DC29BE151CB4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5B06A322-57ED-4C4B-B53F-3A817DFB17BD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5B06A322-57ED-4C4B-B53F-3A817DFB17BD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5B06A322-57ED-4C4B-B53F-3A817DFB17BD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5B06A322-57ED-4C4B-B53F-3A817DFB17BD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FC8A8929-6DE1-4B2C-90E4-1D7A715103BD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FC8A8929-6DE1-4B2C-90E4-1D7A715103BD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FC8A8929-6DE1-4B2C-90E4-1D7A715103BD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FC8A8929-6DE1-4B2C-90E4-1D7A715103BD}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -150,6 +182,13 @@ Global
 		{D6CDEFB3-0A50-4BBD-9DBF-E59961407481} = {6F2DE1B8-E205-40DB-9C27-80A8F7950509}
 		{948354E8-1479-4555-9033-B4A143FBEFFF} = {82086A76-B0F9-4A18-B367-39A128A0F9CB}
 		{4B0C5058-1E1D-4AF6-A1AB-FBD98796E641} = {283FF89C-B9E5-4062-9FB3-E882D4553522}
+		{BB14B222-2D8C-4009-83C7-061D022768A3} = {C02082EB-B46E-4031-9D9B-B04FE556D7A6}
+		{DE9C7981-0346-4F77-877A-A9F1B0307294} = {C02082EB-B46E-4031-9D9B-B04FE556D7A6}
+		{5151E473-C2BE-4D1D-820E-78978AF7AE18} = {BB14B222-2D8C-4009-83C7-061D022768A3}
+		{96152217-E95F-4C67-92B9-DC29BE151CB4} = {DE9C7981-0346-4F77-877A-A9F1B0307294}
+		{5B06A322-57ED-4C4B-B53F-3A817DFB17BD} = {DE9C7981-0346-4F77-877A-A9F1B0307294}
+		{6D19F361-7984-43D1-BC35-4811DE229CF1} = {C02082EB-B46E-4031-9D9B-B04FE556D7A6}
+		{FC8A8929-6DE1-4B2C-90E4-1D7A715103BD} = {6D19F361-7984-43D1-BC35-4811DE229CF1}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {E45DB426-8E26-4B0F-92EF-764A4F052493}

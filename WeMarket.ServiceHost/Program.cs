@@ -1,6 +1,7 @@
-
 using _0_Framework.Application;
 using _0_Framework.Infrastructure;
+using BlogManagament.Infrastructure.EFCore.Extentions;
+using BlogManagement.Application.Extentions;
 using DiscountManagement.Application.Extentions;
 using DiscountManagement.Infrastructure.EFcore.Extentions;
 using InventoryManagement.Application.Extentions;
@@ -28,6 +29,12 @@ builder.Services.AddInventoryManagementApplicationDependencies();
 builder.Services.AddDiscountInfrastructureDependencies(builder.Configuration);
 builder.Services.AddDiscountApplicationDependencies();
 //Discount 
+
+//BlogManagement 
+builder.Services.AddBlogApplicationConfiguration();
+builder.Services.AddBlogInfrastructureDependencies(builder.Configuration);
+//BlogManagement 
+
 
 
 
