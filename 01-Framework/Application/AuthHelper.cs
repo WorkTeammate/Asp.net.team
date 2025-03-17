@@ -35,10 +35,9 @@ namespace _0_Framework.Application
 
             var claims = _contextAccessor.HttpContext.User.Claims.ToList();
             resault.Id =long.Parse(claims.FirstOrDefault(x => x.Type == "AccountId").Value);
-            resault.UserName = claims.FirstOrDefault(x => x.Type == "UserName").Value;
+            resault.Username = claims.FirstOrDefault(x => x.Type == "UserName").Value;
             resault.RoleId = long.Parse(claims.FirstOrDefault(x => x.Type == ClaimTypes.Role).Value);
-            resault.FullName = claims.FirstOrDefault(x => x.Type == ClaimTypes.Name).Value;
-            resault.Picture = claims.FirstOrDefault(x => x.Type == "Picture").Value;
+            resault.Fullname = claims.FirstOrDefault(x => x.Type == ClaimTypes.Name).Value;
 
 
             resault.Role = Roles.GetByRole(resault.RoleId);
@@ -77,10 +76,9 @@ namespace _0_Framework.Application
             var claims = new List<Claim>
             {
                 new Claim("AccountId", account.Id.ToString()),
-                new Claim(ClaimTypes.Name, account.FullName),
-                new Claim("Picture", account.Picture),
+                new Claim(ClaimTypes.Name, account.Fullname),
                 new Claim(ClaimTypes.Role, account.RoleId.ToString()),
-                new Claim("UserName", account.UserName), // Or Use ClaimTypes.NameIdentifier
+                new Claim("UserName", account.Username), // Or Use ClaimTypes.NameIdentifier
                 new Claim("Permissions", permissions)
             };
 

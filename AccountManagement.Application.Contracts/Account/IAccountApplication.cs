@@ -18,8 +18,6 @@ namespace AccountManagement.Application.Contracts.Account
         List<AccountViewModel> Search(AccountSearchModel searchModel);
         void Logout();
         List<AccountViewModel> GetAccounts();
-        OperationResult RemoveAccount(long id);
-        OperationResult RestoreAccount(long id);
 
     }
 }

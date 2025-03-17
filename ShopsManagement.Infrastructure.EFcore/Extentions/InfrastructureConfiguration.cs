@@ -1,8 +1,10 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using _0_Framework.Infrastructure;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using ShopsManagement.Application.Contracts.MarketCategories;
 using ShopsManagement.Application.Contracts.Markets;
+using ShopsManagement.Configuration.Permissions;
 using ShopsManagement.Domain.MarketCategoryAgg;
 using ShopsManagement.Domain.ProductAgg;
 using ShopsManagement.Domain.ShopsAgg;
@@ -22,6 +24,8 @@ namespace ShopsManagement.Infrastructure.EFcore.Extentions
             services.AddScoped<IMarketsRepository, MarketRepository>();
             services.AddScoped<IMarketCategoryRepository, MarketCategoryRepository>();
             services.AddScoped<IProductRepository, ProductRepository>();
+            services.AddTransient<IPermissionExposer, ShopPermissionExposer>();
+
             services.AddDbContext<ShopsContext>(x => x.UseSqlServer(configuration.GetConnectionString("DBserver")));
 
         }

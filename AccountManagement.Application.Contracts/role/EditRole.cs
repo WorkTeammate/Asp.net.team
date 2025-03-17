@@ -9,7 +9,7 @@ namespace AccountManagement.Application.Contracts.role
 
         public EditRole()
         {
-            Permissions = new List<long>();
+            Permissions = new List<int>();
         }
     }
 }

@@ -20,18 +20,9 @@ namespace AccountMaagement.Infrastructure.EFcore.Repository
             _context = context;
         }
 
-        public List<AccountViewModel> GetAccounts()
-        {
-            return _context.Account.Select(x=>new AccountViewModel
-            {
-                Id = x.Id,
-                Fullname = x.FullName,
-            }).ToList();
-        }
-
         public Account GetBy(string username)
         {
-            return _context.Account.FirstOrDefault(x => x.UserName == username);
+            return _context.Account.FirstOrDefault(x => x.Username == username);
         }
 
         public EditAccount GetDetails(long id)
@@ -39,44 +30,49 @@ namespace AccountMaagement.Infrastructure.EFcore.Repository
             return _context.Account.Select(x => new EditAccount
             {
                 Id = x.Id,
-                FullName = x.FullName,
-                Gmail = x.Gmail,
-                MobileNumber = x.MobileNumber,
-                ProfilePicture = x.ProfilePicture,
-                UserName = x.UserName
+                FullName = x.Fullname,
+                MobileNumber = x.Mobile,
+                RoleId = x.RoleId,
+                UserName = x.Username
             }).FirstOrDefault(x => x.Id == id);
+        }
+
+        public List<AccountViewModel> GetAccounts()
+        {
+            return _context.Account.Select(x => new AccountViewModel
+            {
+                Id = x.Id,
+                Fullname = x.Fullname
+            }).ToList();
         }
 
         public List<AccountViewModel> Search(AccountSearchModel searchModel)
         {
             var query = _context.Account.Include(x => x.Role).Select(x => new AccountViewModel
             {
-                Id= x.Id,
-                Fullname= x.FullName,
-                CreationDate=x.CreationDate.ToFarsi(),
-                Gmail= x.Gmail,
-                MobileNumber=x.MobileNumber,
-                ProfilePicture= x.ProfilePicture,
-                RoleId = x.RoleId,
+                Id = x.Id,
+                Fullname = x.Fullname,
+                Mobile = x.Mobile,
+                ProfilePhoto = x.ProfilePhoto,
                 Role = x.Role.Name,
-                Username = x.UserName
+                RoleId = x.RoleId,
+                Username = x.Username,
+                CreationDate = x.CreationDate.ToFarsi()
             });
-            if (!string.IsNullOrWhiteSpace(searchModel.Gmail))
-                query = query.Where(x => x.Gmail.Contains(searchModel.Gmail));
-
-            if (searchModel.RoleId > 0)
-                query = query.Where(x => x.RoleId == searchModel.RoleId);
-
-            if (!string.IsNullOrWhiteSpace(searchModel.Username))
-                query = query.Where(x => x.Username.Contains(searchModel.Username));
 
             if (!string.IsNullOrWhiteSpace(searchModel.Fullname))
                 query = query.Where(x => x.Fullname.Contains(searchModel.Fullname));
 
-            if (!string.IsNullOrWhiteSpace(searchModel.MobileNumber))
-                query = query.Where(x => x.MobileNumber.Contains(searchModel.MobileNumber));
+            if (!string.IsNullOrWhiteSpace(searchModel.Username))
+                query = query.Where(x => x.Username.Contains(searchModel.Username));
 
-            return query.OrderByDescending(x=>x.Id).ToList();
+            if (!string.IsNullOrWhiteSpace(searchModel.Mobile))
+                query = query.Where(x => x.Mobile.Contains(searchModel.Mobile));
+
+            if (searchModel.RoleId > 0)
+                query = query.Where(x => x.RoleId == searchModel.RoleId);
+
+            return query.OrderByDescending(x => x.Id).ToList();
         }
     }
 }

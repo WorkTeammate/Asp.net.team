@@ -1,13 +1,14 @@
 
 using _0_Framework.Application;
-using AccountMaagement.Infrastructure.EFcore.Extentions;
-using AccountManagement.Application.Extentions;
+using _0_Framework.Infrastructure;
 using DiscountManagement.Application.Extentions;
 using DiscountManagement.Infrastructure.EFcore.Extentions;
 using InventoryManagement.Application.Extentions;
 using InventoryManagement.EfCore.Extentions;
+using Microsoft.AspNetCore.Authentication.Cookies;
 using ShopsManagement.Application.Extentions;
 using ShopsManagement.Infrastructure.EFcore.Extentions;
+using SM.LampShade;
 
 var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddHttpContextAccessor();
@@ -28,10 +29,6 @@ builder.Services.AddDiscountInfrastructureDependencies(builder.Configuration);
 builder.Services.AddDiscountApplicationDependencies();
 //Discount 
 
-//Account 
-builder.Services.AddAccountApplicationDependencies();
-builder.Services.AddAccountInfrastructureDependencies(builder.Configuration);
-//Account 
 
 
 //Auth 
@@ -45,13 +42,11 @@ builder.Services.AddSingleton<IPasswordHasher, PasswordHasher>();
 // Add services to the container.
 builder.Services.AddRazorPages();
 
+//,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+
 
 
 var app = builder.Build();
-
-
-
-
 // Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())
 {
@@ -62,8 +57,10 @@ if (!app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 app.UseStaticFiles();
+app.UseAuthentication();
 
 app.UseRouting();
+app.UseCookiePolicy();
 
 app.UseAuthorization();
 

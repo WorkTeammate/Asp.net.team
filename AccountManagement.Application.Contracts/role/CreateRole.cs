@@ -9,6 +9,6 @@ namespace AccountManagement.Application.Contracts.role
     public class CreateRole
     {
         public string Name { get; set; }
-        public List<long> Permissions { get; set; }
+        public List<int> Permissions { get; set; }
     }
 }

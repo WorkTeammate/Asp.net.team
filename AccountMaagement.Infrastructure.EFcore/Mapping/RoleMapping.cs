@@ -13,7 +13,7 @@ namespace AccountMaagement.Infrastructure.EFcore.Mapping
     {
         public void Configure(EntityTypeBuilder<Role> builder)
         {
-            builder.ToTable("Role");
+            builder.ToTable("Roles");
             builder.HasKey(x => x.Id);
 
             builder.Property(x => x.Name).HasMaxLength(100).IsRequired();

@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.10.35122.118
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Market.ShopsManagement", "Market.ShopsManagement", "{AFF8C751-2E4D-424F-8281-EC44B732A10D}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "0", "0", "{AFF8C751-2E4D-424F-8281-EC44B732A10D}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "01-SM.Domain", "01-SM.Domain", "{99D1B894-3223-4BC7-80D7-CE9B1ABFF60C}"
 EndProject
@@ -55,21 +55,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DiscountManagement.Applicat
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DiscountManagement.Infrastructure.EFcore", "DiscountManagement.Infrastructure.EFcore\DiscountManagement.Infrastructure.EFcore.csproj", "{948354E8-1479-4555-9033-B4A143FBEFFF}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Market.AccountManagement", "Market.AccountManagement", "{F8F82DD9-1EB5-4A3C-A473-E3C33A1110D7}"
-EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "01-AM.Domain", "01-AM.Domain", "{30CA1099-36DF-4E51-92B9-EBC335CE5E36}"
-EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "02-AM.Application", "02-AM.Application", "{3B71444D-4445-4FCF-9C06-3E6A9D3A0800}"
-EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "03-AM.Infrastructure", "03-AM.Infrastructure", "{16205A13-D56D-424F-A85A-081022918250}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AccountManagement.Domain", "AccountManagement.Domain\AccountManagement.Domain.csproj", "{39197317-3D53-4D5D-8C3D-B122309EA43E}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AccountManagement.Application.Contracts", "AccountManagement.Application.Contracts\AccountManagement.Application.Contracts.csproj", "{9871BE7E-790B-49BE-9A3F-780870263C6C}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AccountMaagement.Infrastructure.EFcore", "AccountMaagement.Infrastructure.EFcore\AccountMaagement.Infrastructure.EFcore.csproj", "{31B6918F-8431-453B-9463-A25E82B1AB5A}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AccountManagement.Application", "AccountManagement.Application\AccountManagement.Application.csproj", "{305E7C65-F79E-4D1E-97AE-277D25E7DFC7}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ShopsManagement.Configuration", "ShopManagement.Configuration\ShopsManagement.Configuration.csproj", "{4B0C5058-1E1D-4AF6-A1AB-FBD98796E641}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -133,22 +119,10 @@ Global
 		{948354E8-1479-4555-9033-B4A143FBEFFF}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{948354E8-1479-4555-9033-B4A143FBEFFF}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{948354E8-1479-4555-9033-B4A143FBEFFF}.Release|Any CPU.Build.0 = Release|Any CPU
-		{39197317-3D53-4D5D-8C3D-B122309EA43E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{39197317-3D53-4D5D-8C3D-B122309EA43E}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{39197317-3D53-4D5D-8C3D-B122309EA43E}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{39197317-3D53-4D5D-8C3D-B122309EA43E}.Release|Any CPU.Build.0 = Release|Any CPU
-		{9871BE7E-790B-49BE-9A3F-780870263C6C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{9871BE7E-790B-49BE-9A3F-780870263C6C}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{9871BE7E-790B-49BE-9A3F-780870263C6C}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{9871BE7E-790B-49BE-9A3F-780870263C6C}.Release|Any CPU.Build.0 = Release|Any CPU
-		{31B6918F-8431-453B-9463-A25E82B1AB5A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{31B6918F-8431-453B-9463-A25E82B1AB5A}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{31B6918F-8431-453B-9463-A25E82B1AB5A}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{31B6918F-8431-453B-9463-A25E82B1AB5A}.Release|Any CPU.Build.0 = Release|Any CPU
-		{305E7C65-F79E-4D1E-97AE-277D25E7DFC7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{305E7C65-F79E-4D1E-97AE-277D25E7DFC7}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{305E7C65-F79E-4D1E-97AE-277D25E7DFC7}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{305E7C65-F79E-4D1E-97AE-277D25E7DFC7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4B0C5058-1E1D-4AF6-A1AB-FBD98796E641}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4B0C5058-1E1D-4AF6-A1AB-FBD98796E641}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4B0C5058-1E1D-4AF6-A1AB-FBD98796E641}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4B0C5058-1E1D-4AF6-A1AB-FBD98796E641}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -175,13 +149,7 @@ Global
 		{ACE9F094-A242-434B-98B9-0EC92F6611DF} = {6F2DE1B8-E205-40DB-9C27-80A8F7950509}
 		{D6CDEFB3-0A50-4BBD-9DBF-E59961407481} = {6F2DE1B8-E205-40DB-9C27-80A8F7950509}
 		{948354E8-1479-4555-9033-B4A143FBEFFF} = {82086A76-B0F9-4A18-B367-39A128A0F9CB}
-		{30CA1099-36DF-4E51-92B9-EBC335CE5E36} = {F8F82DD9-1EB5-4A3C-A473-E3C33A1110D7}
-		{3B71444D-4445-4FCF-9C06-3E6A9D3A0800} = {F8F82DD9-1EB5-4A3C-A473-E3C33A1110D7}
-		{16205A13-D56D-424F-A85A-081022918250} = {F8F82DD9-1EB5-4A3C-A473-E3C33A1110D7}
-		{39197317-3D53-4D5D-8C3D-B122309EA43E} = {30CA1099-36DF-4E51-92B9-EBC335CE5E36}
-		{9871BE7E-790B-49BE-9A3F-780870263C6C} = {3B71444D-4445-4FCF-9C06-3E6A9D3A0800}
-		{31B6918F-8431-453B-9463-A25E82B1AB5A} = {16205A13-D56D-424F-A85A-081022918250}
-		{305E7C65-F79E-4D1E-97AE-277D25E7DFC7} = {3B71444D-4445-4FCF-9C06-3E6A9D3A0800}
+		{4B0C5058-1E1D-4AF6-A1AB-FBD98796E641} = {283FF89C-B9E5-4062-9FB3-E882D4553522}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {E45DB426-8E26-4B0F-92EF-764A4F052493}

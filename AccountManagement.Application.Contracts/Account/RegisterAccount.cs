@@ -39,6 +39,7 @@ namespace AccountManagement.Application.Contracts.Account
         public long RoleId { get; set; }
 
 
+
     }
 
 }

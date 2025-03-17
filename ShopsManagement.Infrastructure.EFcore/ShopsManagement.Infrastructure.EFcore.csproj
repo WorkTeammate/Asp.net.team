@@ -21,6 +21,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\ShopManagement.Configuration\ShopsManagement.Configuration.csproj" />
     <ProjectReference Include="..\WM.ShopsManagement.Domain\ShopsManagement.Domain.csproj" />
   </ItemGroup>
 
