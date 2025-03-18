@@ -1,4 +1,5 @@
-﻿using BlogManagement.Application.Contracts.ArticleCategory;
+﻿using BlogManagement.Application.Contracts.Article;
+using BlogManagement.Application.Contracts.ArticleCategory;
 using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Collections.Generic;
@@ -13,6 +14,7 @@ namespace BlogManagement.Application.Extentions
         public static void AddBlogApplicationConfiguration(this IServiceCollection services)
         {
             services.AddScoped<IArticleCategoryApplication, ArticleCategoryApplication>();
+            services.AddScoped<IArticleApplication, ArticleApplication>();
         }
     }
 }

@@ -51,7 +51,9 @@ namespace BlogManagament.Infrastructure.EFCore.Repository
 
         public List<ArticleCategoryViewModel> Search(ArticleCategorySearchModel searchModel)
         {
-            var query = _blogContext.ArticleCategory.Select(x => new ArticleCategoryViewModel
+            var query = _blogContext.ArticleCategory
+                .Include(x=>x.Articles)
+                .Select(x => new ArticleCategoryViewModel
             {
                 Id = x.Id,
                 CanonicalAddress = x.CanonicalAddress,
@@ -66,6 +68,7 @@ namespace BlogManagament.Infrastructure.EFCore.Repository
                 ShowOrder = x.ShowOrder,
                 Slug = x.Slug,
                 CreationDate=x.CreationDate.ToFarsi(),
+                ArticlesCount = x.Articles.Count
             });
             if (!string.IsNullOrWhiteSpace(searchModel.Name))
                 query = query.Where(x => x.Name.Contains(searchModel.Name));

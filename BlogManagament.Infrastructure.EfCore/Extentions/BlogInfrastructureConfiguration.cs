@@ -1,4 +1,6 @@
-﻿using BlogManagament.Infrastructure.EFCore.Repository;
+﻿using BlogManagament.Infrastructure.EfCore.Repository;
+using BlogManagament.Infrastructure.EFCore.Repository;
+using BlogManagement.Domain.ArticleAgg;
 using BlogManagement.Domain.ArticleCategoryAgg;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
@@ -16,6 +18,7 @@ namespace BlogManagament.Infrastructure.EFCore.Extentions
         public static void AddBlogInfrastructureDependencies(this IServiceCollection services, IConfiguration configuration)
         {
             services.AddScoped<IArticleCategoryRepository, ArticleCategoryRepository>();
+            services.AddScoped<IArticleRepository, ArticleRepository>();
             services.AddDbContext<BlogContext>(x => x.UseSqlServer(configuration.GetConnectionString("DBserver")));
 
         }

@@ -36,8 +36,6 @@ builder.Services.AddBlogInfrastructureDependencies(builder.Configuration);
 //BlogManagement 
 
 
-
-
 //Auth 
 builder.Services.AddTransient<IAuthHelper, AuthHelper>();
 builder.Services.AddSingleton<IPasswordHasher, PasswordHasher>();

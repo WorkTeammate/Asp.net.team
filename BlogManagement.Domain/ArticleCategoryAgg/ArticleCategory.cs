@@ -1,4 +1,5 @@
 ﻿using _0_Framework.Domain;
+using BlogManagement.Domain.ArticleAgg;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -20,6 +21,7 @@ namespace BlogManagement.Domain.ArticleCategoryAgg
         public string CanonicalAddress { get; private set; }
         public int ShowOrder { get; private set; }
         public bool IsDeleted { get; private set; }
+        public List<Article> Articles { get; private set; }
 
 
         public ArticleCategory()

@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace BlogManagament.Infrastructure.EFCore.Mapping
 {
-    public class BlogCategoryMapping : IEntityTypeConfiguration<ArticleCategory>
+    public class ArticleCategoryMapping : IEntityTypeConfiguration<ArticleCategory>
     {
         public void Configure(EntityTypeBuilder<ArticleCategory> builder)
         {
@@ -27,7 +27,9 @@ namespace BlogManagament.Infrastructure.EFCore.Mapping
             builder.Property(x => x.ShowOrder).IsRequired();
 
 
-
+            builder.HasMany(x=>x.Articles)
+                .WithOne(x=>x.Category)
+                    .HasForeignKey(x=>x.CategoryId);
         }
     }
 }
