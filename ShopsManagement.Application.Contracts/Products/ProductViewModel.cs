@@ -18,8 +18,5 @@
         public string ProductCategory { get; set; }
         public long CategoryId { get; set; }
 
-        public string Markets { get; set; }
-        public long MarketId { get; set; }
-
     }
 }

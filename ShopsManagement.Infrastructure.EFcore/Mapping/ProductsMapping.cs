@@ -26,11 +26,6 @@ namespace ShopsManagement.Infrastructure.EFcore.Mapping
             builder.Property(x => x.Keywords).HasMaxLength(120);
             builder.Property(x => x.CreationDate).IsRequired();
 
-
-            builder.HasOne(x => x.Markets)
-                .WithMany(x => x.Products)
-                    .HasForeignKey(x => x.MarketId);
-
         }
     }
 }

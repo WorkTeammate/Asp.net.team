@@ -6,6 +6,13 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Areas\Admin\Pages\MarketsManagement\**" />
+    <Content Remove="Areas\Admin\Pages\MarketsManagement\**" />
+    <EmbeddedResource Remove="Areas\Admin\Pages\MarketsManagement\**" />
+    <None Remove="Areas\Admin\Pages\MarketsManagement\**" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="CountryData.Standard" Version="1.5.0" />
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="9.0.1" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Abstractions" Version="9.0.1" />
@@ -33,22 +40,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Areas\Admin\Pages\MarketsManagement\MarketCategoryies\" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Content Update="Areas\Admin\Pages\MarketsManagement\MarketCategoryies\Create.cshtml">
-      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
-      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
-    </Content>
-    <Content Update="Areas\Admin\Pages\MarketsManagement\MarketCategoryies\Edit.cshtml">
-      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
-      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
-    </Content>
-    <Content Update="Areas\Admin\Pages\MarketsManagement\MarketCategoryies\Index.cshtml">
-      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
-      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
-    </Content>
     <Content Update="wwwroot\Admin\assets\datatables\dataTables.bootstrap.js">
       <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>

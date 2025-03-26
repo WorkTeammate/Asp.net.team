@@ -22,9 +22,9 @@ namespace InventoryManagement.Application
         public OperationResult Create(CreateInventory command)
         {
             var opration = new OperationResult();
-            if (_inventoryRepository.Exists(x => x.ProductId == command.ProductId && x.MarketId==command.MarketId))
+            if (_inventoryRepository.Exists(x => x.ProductId == command.ProductId))
                 return opration.Failed(ApplicationMessages.DuplicatedRecord);
-            var inventory = new Inventory(command.ProductId,command.UnitPrice,command.MarketId);
+            var inventory = new Inventory(command.ProductId,command.UnitPrice);
             _inventoryRepository.Create(inventory);
             _inventoryRepository.SaveChanges();
             return opration.Successful();
@@ -36,10 +36,10 @@ namespace InventoryManagement.Application
             var inventory = _inventoryRepository.Get(command.ProductId);
             if(inventory==null)
                 return opration.Failed(ApplicationMessages.RecordNotFound);
-            if (_inventoryRepository.Exists(x => x.ProductId == command.ProductId && x.Id != command.Id && x.MarketId==command.MarketId))
+            if (_inventoryRepository.Exists(x => x.ProductId == command.ProductId && x.Id != command.Id))
                 return opration.Failed(ApplicationMessages.DuplicatedRecord);
 
-            inventory.Edit(command.ProductId,command.UnitPrice,command.MarketId);
+            inventory.Edit(command.ProductId,command.UnitPrice);
             _inventoryRepository.SaveChanges();
             return opration.Successful();
         }
@@ -71,7 +71,7 @@ namespace InventoryManagement.Application
             var opration = new OperationResult();
             foreach (var item in command)
             {
-                var inventory = _inventoryRepository.GetBy(item.ProductId,item.MarketId);
+                var inventory = _inventoryRepository.GetBy(item.ProductId);
                 inventory.Reduce(item.Count, 0, item.Description, item.OrderId);
             }
             _inventoryRepository.SaveChanges();

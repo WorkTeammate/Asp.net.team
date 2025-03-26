@@ -29,7 +29,7 @@ namespace ShopsManagement.Application
 
             var product = new Product(command.Name, command.ShortDescription, command.Description,
                 command.Picture, command.PictureAlt, command.PictureTitle, slug, command.Keywords,
-                command.MetaDescription, command.MarketId);
+                command.MetaDescription);
             _productRepository.Create(product);
             _productRepository.SaveChanges();
             return operation.Successful();
@@ -48,7 +48,7 @@ namespace ShopsManagement.Application
             var slug = command.Slug.Slugify();
             product.Edit(command.Name, command.ShortDescription, command.Description,
                 command.Picture, command.PictureAlt, command.PictureTitle, slug, command.Keywords
-                , command.MetaDescription, command.MarketId);
+                , command.MetaDescription);
 
             _productRepository.SaveChanges();
             return operation.Successful();

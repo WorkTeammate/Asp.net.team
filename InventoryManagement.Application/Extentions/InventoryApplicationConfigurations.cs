@@ -1,7 +1,5 @@
 ﻿using InventoryManagement.Application.Contracts.Inventory;
 using Microsoft.Extensions.DependencyInjection;
-using ShopsManagement.Application.Contracts.MarketCategories;
-using ShopsManagement.Application.Contracts.Markets;
 using ShopsManagement.Application.Contracts.Products;
 using System;
 using System.Collections.Generic;

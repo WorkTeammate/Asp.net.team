@@ -17,7 +17,6 @@ namespace DiscountManagement.Infrastructure.EFcore.Mapping
             builder.HasKey(x => x.Id);
 
             builder.Property(x=>x.ProductId).IsRequired();
-            builder.Property(x=>x.MarketId).IsRequired();
             builder.Property(x=>x.Reason).HasMaxLength(500);
             builder.Property(x=>x.StartDate).IsRequired();
             builder.Property(x=>x.EndDate).IsRequired();

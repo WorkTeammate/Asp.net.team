@@ -2,9 +2,6 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using _0_Framework.Infrastructure;
-using ShopsManagement.Application.Contracts.Markets;
-using ShopsManagement.Application.Contracts.Shops;
-using ShopsManagement.Application.Contracts.MarketCategories;
 using ShopsManagement.Application.Contracts.Products;
 
 namespace WeMarket.ServiceHost.Areas.Admin.Pages.ProductsManagement.Products
@@ -17,25 +14,21 @@ namespace WeMarket.ServiceHost.Areas.Admin.Pages.ProductsManagement.Products
         public SelectList Markets;
 
         private readonly IProductApplication _productApplication;
-        private readonly IMarketApplication _marketApplication;
 
-        public IndexModel(IProductApplication productApplication,
-            IMarketApplication marketApplication)
+        public IndexModel(IProductApplication productApplication)
         {
             _productApplication = productApplication;
-            _marketApplication = marketApplication;
         }
 
         public void OnGet(ProductSearchModel searchModel)
         {
-            Markets = new SelectList(_marketApplication.GetMarkets(), "Id", "PersianName");
             Product = _productApplication.Search(searchModel);
         }
         public IActionResult OnGetCreate()
         {
             var command = new CreateProduct
             {
-                Markets = _marketApplication.GetMarkets()
+             
             };
             return Partial("./Create", command);
         }
@@ -56,7 +49,6 @@ namespace WeMarket.ServiceHost.Areas.Admin.Pages.ProductsManagement.Products
             var Product = _productApplication.GetDetails(id);
             if(Product == null)
                 return Page();
-            Product.Markets = _marketApplication.GetMarkets();
             return Partial("Edit", Product);
         }
         public IActionResult OnPostEdit(EditProduct command)

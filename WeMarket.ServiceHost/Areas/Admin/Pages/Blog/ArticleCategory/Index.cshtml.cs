@@ -2,9 +2,6 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using _0_Framework.Infrastructure;
-using ShopsManagement.Application.Contracts.Markets;
-using ShopsManagement.Application.Contracts.Shops;
-using ShopsManagement.Application.Contracts.MarketCategories;
 using BlogManagement.Application.Contracts.ArticleCategory;
 
 namespace WeMarket.ServiceHost.Areas.Admin.Pages.Blog.ArticleCategory

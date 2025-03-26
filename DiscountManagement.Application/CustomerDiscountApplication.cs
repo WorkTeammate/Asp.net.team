@@ -16,14 +16,14 @@ namespace DiscountManagement.Application
         public OperationResult DefineCustomerDiscount(DefineCustomerDiscount command)
         {
             var operation = new OperationResult();
-            if (_customerDiscountRepository.Exists(x => x.ProductId == command.ProductId && x.MarketId == x.MarketId && x.DiscountRate == command.DiscountRate))
+            if (_customerDiscountRepository.Exists(x => x.ProductId == command.ProductId && x.DiscountRate == command.DiscountRate))
                 return operation.Failed(ApplicationMessages.DuplicatedRecord);
 
 
             var startDate = command.StartDate.ToGeorgianDateTime();
             var EndDate = command.EndDate.ToGeorgianDateTime();
 
-            var CustomerDiscount = new CustomerDiscount(command.ProductId, command.MarketId, command.DiscountRate, startDate
+            var CustomerDiscount = new CustomerDiscount(command.ProductId, command.DiscountRate, startDate
                 , EndDate, command.Reason);
 
             _customerDiscountRepository.Create(CustomerDiscount);
@@ -42,13 +42,13 @@ namespace DiscountManagement.Application
 
 
             if (_customerDiscountRepository.Exists(x => x.ProductId == command.ProductId
-            && x.MarketId == command.MarketId && x.DiscountRate == command.DiscountRate && x.Id != command.Id))
+            && x.DiscountRate == command.DiscountRate && x.Id != command.Id))
                 return operation.Failed(ApplicationMessages.DuplicatedRecord);
 
             var startDate = command.StartDate.ToGeorgianDateTime();
             var EndDate = command.EndDate.ToGeorgianDateTime();
 
-            CustomerDiscount.Edit(command.ProductId, command.MarketId, command.DiscountRate, startDate
+            CustomerDiscount.Edit(command.ProductId, command.DiscountRate, startDate
                 , EndDate, command.Reason);
 
             _customerDiscountRepository.SaveChanges();

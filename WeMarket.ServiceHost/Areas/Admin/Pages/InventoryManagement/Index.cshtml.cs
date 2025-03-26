@@ -5,7 +5,6 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
-using ShopsManagement.Application.Contracts.Markets;
 using ShopsManagement.Application.Contracts.Products;
 
 
@@ -21,20 +20,16 @@ namespace WeMarket.ServiceHost.Areas.Pages.InventoryManagement
 
         private readonly IProductApplication _productApplication;
         private readonly IInventoryApplicaton _inventoryApplication;
-        private readonly IMarketApplication _marketApplication;
 
         public IndexModel(IProductApplication productApplication
-            , IInventoryApplicaton inventoryApplication
-            , IMarketApplication marketApplication)
+            , IInventoryApplicaton inventoryApplication)
         {
             _productApplication = productApplication;
             _inventoryApplication = inventoryApplication;
-            _marketApplication = marketApplication;
         }
         public void OnGet(InventorySearchModel searchModel)
         {
             Products = new SelectList(_productApplication.GetProducts(), "Id", "Name");
-            Markets = new SelectList(_marketApplication.GetMarkets(), "Id", "PersianName");
             Inventory = _inventoryApplication.Search(searchModel);
         }
         public IActionResult OnGetCreate()
@@ -42,7 +37,6 @@ namespace WeMarket.ServiceHost.Areas.Pages.InventoryManagement
             var command = new CreateInventory
             {
                 Product = _productApplication.GetProducts(),
-                Market = _marketApplication.GetMarkets(),
             };
             return Partial("./Create", command);
         }
@@ -57,7 +51,6 @@ namespace WeMarket.ServiceHost.Areas.Pages.InventoryManagement
         {
             var inventory = _inventoryApplication.GetDetails(id);
             inventory.Product = _productApplication.GetProducts();
-            inventory.Market = _marketApplication.GetMarkets();
             return Partial("Edit", inventory);
         }
 

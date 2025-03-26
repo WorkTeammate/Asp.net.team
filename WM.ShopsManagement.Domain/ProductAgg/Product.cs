@@ -1,5 +1,4 @@
 ﻿using _0_Framework.Domain;
-using ShopsManagement.Domain.ShopsAgg;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -20,8 +19,6 @@ namespace ShopsManagement.Domain.ProductAgg
         public string Keywords { get; private set; }
         public string MetaDescription { get; private set; }
         public bool IsDeleted { get; private set; }
-        public Markets Markets { get; private set; }
-        public long MarketId { get; private set; }
 
         protected Product()
         {
@@ -29,7 +26,7 @@ namespace ShopsManagement.Domain.ProductAgg
         }
 
         public Product(string name, string shortDescription, string description, string picture,
-            string pictureAlt, string pictureTitle, string slug, string keywords, string metaDescription , long marketid)
+            string pictureAlt, string pictureTitle, string slug, string keywords, string metaDescription)
         {
             Name = name;
             ShortDescription = shortDescription;
@@ -41,10 +38,9 @@ namespace ShopsManagement.Domain.ProductAgg
             Keywords = keywords;
             MetaDescription = metaDescription;
             IsDeleted = false;
-            MarketId = marketid;
         }
         public void Edit(string name, string shortDescription, string description, string picture,
-            string pictureAlt, string pictureTitle, string slug, string keywords, string metaDescription , long marketid)
+            string pictureAlt, string pictureTitle, string slug, string keywords, string metaDescription)
         {
             Name = name;
             ShortDescription = shortDescription;
@@ -55,7 +51,6 @@ namespace ShopsManagement.Domain.ProductAgg
             Slug = slug;
             Keywords = keywords;
             MetaDescription = metaDescription;
-            MarketId = marketid;
 
         }
 

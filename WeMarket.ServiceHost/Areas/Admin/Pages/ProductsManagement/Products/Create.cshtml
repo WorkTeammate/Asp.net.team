@@ -51,18 +51,6 @@
         </div>
 
     </div>
-    <div class="row">
-        <div class="col-md-12">
-            <div class="form-group">
-                <label asp-for="MarketId" class="control-label">گروه فروشگاهی</label>
-                <select class="form-control" asp-for="MarketId"
-                        asp-items='new SelectList(Model.Markets, "Id", "PersianName")'>
-                    <option value="0">گروه فروشگاهی</option>
-                </select>
-                <span asp-validation-for="MarketId" class="error"></span>
-            </div>
-        </div>
-    </div>
 
     <div class="row">
         <div class="col-md-12">

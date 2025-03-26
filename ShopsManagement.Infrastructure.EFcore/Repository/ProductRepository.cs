@@ -34,7 +34,6 @@ namespace ShopsManagement.Infrastructure.EFcore.Repository
                 PictureTitle = x.PictureTitle,
                 ShortDescription = x.ShortDescription,
                 Slug = x.Slug,
-                MarketId = x.MarketId,
 
             }).OrderByDescending(x => x.Id).FirstOrDefault(x => x.Id == id);
 
@@ -52,7 +51,7 @@ namespace ShopsManagement.Infrastructure.EFcore.Repository
 
         public List<ProductViewModel> Search(ProductSearchModel searchModel)
         {
-            var query = _context.Products.Include(x => x.Markets).Select(x => new ProductViewModel
+            var query = _context.Products.Select(x => new ProductViewModel
             {
                 Id = x.Id,
                 CreationDate = x.CreationDate.ToFarsi(),
@@ -65,9 +64,7 @@ namespace ShopsManagement.Infrastructure.EFcore.Repository
                 PictureTitle = x.PictureTitle,
                 ShortDescription = x.ShortDescription,
                 Slug = x.Slug,
-                IsDeleted=x.IsDeleted,
-                Markets = x.Markets.PersianName,
-                
+                IsDeleted=x.IsDeleted,              
             });
 
 
@@ -77,10 +74,6 @@ namespace ShopsManagement.Infrastructure.EFcore.Repository
 
             if (!string.IsNullOrWhiteSpace(searchModel.ShortDescription))
                 query = query.Where(x => x.ShortDescription.Contains(searchModel.ShortDescription));
-
-
-            if (searchModel.MarketId != 0)
-                query = query.Where(x => x.MarketId == searchModel.MarketId);
 
             return query.OrderByDescending(x => x.Id).ToList();
 

@@ -1,6 +1,4 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
-using ShopsManagement.Application.Contracts.MarketCategories;
-using ShopsManagement.Application.Contracts.Markets;
 using ShopsManagement.Application.Contracts.Products;
 using System;
 using System.Collections.Generic;
@@ -14,8 +12,6 @@ namespace ShopsManagement.Application.Extentions
     {
         public static void AddShopsMangementApplicationDependencies(this IServiceCollection services)
         {
-            services.AddScoped<IMarketApplication, MarketApplication>();
-            services.AddScoped<IMarketCategoryApplication, MarketCategoryApplication>();
             services.AddScoped<IProductApplication, ProductApplication>();
         }
     }

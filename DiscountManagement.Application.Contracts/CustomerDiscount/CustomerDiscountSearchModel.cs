@@ -3,7 +3,6 @@
     public class CustomerDiscountSearchModel
     {
         public long ProductId { get; set; }
-        public long MarketId { get; set; }
         public string StartDate { get; set; }
         public string EndDate { get; set; }
     }

@@ -23,9 +23,9 @@ namespace InventoryManagement.EfCore.Repository
             _ShopsContext = shopsContext;
         }
 
-        public Inventory GetBy(long productId, long MarketId)
+        public Inventory GetBy(long productId)
         {
-            return _context.Inventory.FirstOrDefault(x=>x.ProductId == productId && x.MarketId==MarketId);
+            return _context.Inventory.FirstOrDefault(x=>x.ProductId == productId);
         }
 
         public EditInventory GetDetails(long id)
@@ -34,7 +34,6 @@ namespace InventoryManagement.EfCore.Repository
            {
                Id = x.Id,
                ProductId = x.ProductId,
-               MarketId = x.MarketId,
                UnitPrice=x.UnitPrice,
            }).FirstOrDefault(x=>x.Id==id);
         }
@@ -61,14 +60,12 @@ namespace InventoryManagement.EfCore.Repository
         public List<InventoryViewModel> Search(InventorySearchModel searchModel)
         {
             var products = _ShopsContext.Products.Select(x => new { x.Id, x.Name }).ToList();
-            var Markets = _ShopsContext.Markets.Select(x => new { x.Id, x.PersianName }).ToList();
             var query = _context.Inventory.Select(x => new InventoryViewModel
             {
                 Id= x.Id,
                 CreationDate=x.CreationDate.ToFarsi(),
                 CurrentCount=x.CalculateCurrentCount(),
                 InStock=x.InStock,
-                MarketId=x.MarketId,
                 ProductId=x.ProductId,
                 UnitPrice=x.UnitPrice,    
             });
@@ -76,14 +73,11 @@ namespace InventoryManagement.EfCore.Repository
             if (searchModel.ProductId > 0)
                 query = query.Where(x => x.ProductId == searchModel.ProductId);
 
-            if (searchModel.MarketId > 0)
-                query = query.Where(x => x.MarketId == searchModel.MarketId);
 
             var inventory = query.OrderByDescending(x=>x.Id).ToList();
             inventory.ForEach(item =>
             {
                 item.Product = products.FirstOrDefault(x => x.Id == item.ProductId)?.Name;
-                item.Markets = Markets.FirstOrDefault(x => x.Id == item.ProductId)?.PersianName;
             });
 
             return inventory;

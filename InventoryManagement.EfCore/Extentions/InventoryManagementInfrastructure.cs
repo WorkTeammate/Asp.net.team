@@ -1,8 +1,6 @@
 ﻿using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using ShopsManagement.Domain.MarketCategoryAgg;
 using ShopsManagement.Domain.ProductAgg;
-using ShopsManagement.Domain.ShopsAgg;
 using ShopsManagement.Infrastructure.EFcore.Repository;
 using ShopsManagement.Infrastructure.EFcore;
 using System;

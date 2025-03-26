@@ -34,7 +34,6 @@ namespace DiscountManagement.Infrastructure.EFcore.Repository
                 StartDate = x.StartDate.ToString(CultureInfo.InvariantCulture),
                 EndDate = x.EndDate.ToString(CultureInfo.InvariantCulture),
                 Id = x.Id,
-                MarketId = x.MarketId,
                 ProductId = x.ProductId,
                 Reason = x.Reason,
 
@@ -44,7 +43,6 @@ namespace DiscountManagement.Infrastructure.EFcore.Repository
         public List<CustomerDiscountViewModel> Search(CustomerDiscountSearchModel searchModel)
         {
             var product = _shopsContext.Products.Select(x=>new {x.Id,x.Name }).ToList();
-            var Markets = _shopsContext.Markets.Select(x=>new {x.Id,x.PersianName }).ToList();
             var query = _discountContext.CustomerDiscount.Select(x => new CustomerDiscountViewModel
             {
                 Id = x.Id,
@@ -55,14 +53,11 @@ namespace DiscountManagement.Infrastructure.EFcore.Repository
                 EndDateGr= x.EndDate,
                 StartDate=x.StartDate.ToFarsi(),
                 StartDateGr= x.StartDate,
-                MarketId= x.MarketId,
                 ProductId=x.ProductId,
             });
             if (searchModel.ProductId > 0)
                 query = query.Where(x => x.ProductId == searchModel.ProductId);
 
-            if (searchModel.MarketId > 0)
-                query = query.Where(x => x.MarketId == searchModel.MarketId);
 
             if (!string.IsNullOrWhiteSpace(searchModel.StartDate))
             {
@@ -78,7 +73,6 @@ namespace DiscountManagement.Infrastructure.EFcore.Repository
             discounts.ForEach(discount => 
             {
                 discount.Product = product.FirstOrDefault(x => x.Id == discount.ProductId)?.Name;
-                discount.Market = Markets.FirstOrDefault(x => x.Id == discount.MarketId)?.PersianName;
             });
             return discounts;
 

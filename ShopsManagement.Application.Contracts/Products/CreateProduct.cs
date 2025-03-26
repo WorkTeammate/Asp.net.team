@@ -1,5 +1,4 @@
 ﻿
-using ShopsManagement.Application.Contracts.Shops;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -19,7 +18,5 @@ namespace ShopsManagement.Application.Contracts.Products
         public string Slug { get; set; }
         public string Keywords { get; set; }
         public string MetaDescription { get; set; }
-        public List<MarketViewModel> Markets { get; set; }
-        public long MarketId { get; set; }
     }
 }
