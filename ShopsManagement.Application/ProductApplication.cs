@@ -1,4 +1,4 @@
-﻿using _0_Framework.Application;
+﻿using _01_Framework.Application;
 using Microsoft.EntityFrameworkCore;
 using ShopsManagement.Application.Contracts.Products;
 using ShopsManagement.Domain.ProductAgg;
@@ -29,7 +29,7 @@ namespace ShopsManagement.Application
 
             var product = new Product(command.Name, command.ShortDescription, command.Description,
                 command.Picture, command.PictureAlt, command.PictureTitle, slug, command.Keywords,
-                command.MetaDescription);
+                command.MetaDescription,command.CategoryId);
             _productRepository.Create(product);
             _productRepository.SaveChanges();
             return operation.Successful();
@@ -48,7 +48,7 @@ namespace ShopsManagement.Application
             var slug = command.Slug.Slugify();
             product.Edit(command.Name, command.ShortDescription, command.Description,
                 command.Picture, command.PictureAlt, command.PictureTitle, slug, command.Keywords
-                , command.MetaDescription);
+                , command.MetaDescription,command.CategoryId);
 
             _productRepository.SaveChanges();
             return operation.Successful();

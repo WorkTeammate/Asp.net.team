@@ -1,4 +1,4 @@
-﻿using _0_Framework.Domain;
+﻿using _01_Framework.Domain;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -7,7 +7,7 @@ using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace _0_Framework.Infrastructure
+namespace _01_Framework.Infrastructure
 {
     public class RepositoryBase<Tkey, T> : IRepository<Tkey, T> where T : class
     {
@@ -20,7 +20,7 @@ namespace _0_Framework.Infrastructure
 
         public void Create(T entity)
         {
-            _context.Add<T>(entity);
+            _context.Add(entity);
         }
 
         public bool Exists(Expression<Func<T, bool>> expression)
@@ -35,7 +35,7 @@ namespace _0_Framework.Infrastructure
 
         public List<T> GetAll()
         {
-           return _context.Set<T>().ToList();
+            return _context.Set<T>().ToList();
         }
 
         public void SaveChanges()

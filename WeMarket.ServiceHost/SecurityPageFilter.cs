@@ -1,9 +1,9 @@
-﻿using _0_Framework.Application;
-using _0_Framework.Infrastructure;
+﻿using _01_Framework.Application;
+using _01_Framework.Infrastructure;
 using Microsoft.AspNetCore.Mvc.Filters;
 using System.Reflection;
 
-namespace SM.LampShade
+namespace WeMarket.ServiceHost
 {
     public class SecurityPageFilter : IPageFilter
     {
@@ -16,27 +16,27 @@ namespace SM.LampShade
 
         public void OnPageHandlerExecuted(PageHandlerExecutedContext context)
         {
-            
+
         }
 
         public void OnPageHandlerExecuting(PageHandlerExecutingContext context)
         {
-            var handlerPermission = 
-                (NeedsPermissionAttribute) context.HandlerMethod.MethodInfo.GetCustomAttribute
+            var handlerPermission =
+                (NeedsPermissionAttribute)context.HandlerMethod.MethodInfo.GetCustomAttribute
                 (typeof(NeedsPermissionAttribute));
 
-            if(handlerPermission == null)
+            if (handlerPermission == null)
             {
                 return;
             }
             var accountPermission = _authHelper.GetPermissions();
-            if (accountPermission.All(x=>x != handlerPermission.Permissions))
+            if (accountPermission.All(x => x != handlerPermission.Permissions))
                 context.HttpContext.Response.Redirect("/Account");
         }
 
         public void OnPageHandlerSelected(PageHandlerSelectedContext context)
         {
-           
+
         }
     }
 }

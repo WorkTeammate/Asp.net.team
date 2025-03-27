@@ -1,11 +1,8 @@
-﻿
-
-
-using MailKit.Net.Smtp;
+﻿using MailKit.Net.Smtp;
 using MailKit.Security;
 using MimeKit;
 
-namespace _0_Framework.Application.Email
+namespace _01_Framework.Application.Email
 {
     public class EmailService : IEmailService
     {

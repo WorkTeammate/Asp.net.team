@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace _0_Framework.Infrastructure
+namespace _01_Framework.Infrastructure
 {
     public static class PermissionId
     {

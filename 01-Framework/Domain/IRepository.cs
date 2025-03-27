@@ -5,7 +5,7 @@ using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace _0_Framework.Domain
+namespace _01_Framework.Domain
 {
     /// <summary>
     /// TKey=Type ID , T=Type entity
@@ -13,7 +13,7 @@ namespace _0_Framework.Domain
     /// </summary>
     /// <typeparam name="TKey">Type ID</typeparam>
     /// <typeparam name="T">Type entity -- type class --</typeparam>
-    public interface IRepository<TKey , T> where T : class
+    public interface IRepository<TKey, T> where T : class
     {
         /// <summary>
         /// بر اساس ایدی پیدا میکند
@@ -40,6 +40,6 @@ namespace _0_Framework.Domain
         /// </summary>
         /// <param name="expression"></param>
         /// <returns></returns>
-        bool Exists(Expression<Func<T, bool>>expression);
+        bool Exists(Expression<Func<T, bool>> expression);
     }
 }

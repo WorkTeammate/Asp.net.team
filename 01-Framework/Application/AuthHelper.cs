@@ -3,13 +3,13 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http.Json;
 using System.Security.Claims;
-using _0_Framework.Infrastructure;
+using _01_Framework.Infrastructure;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Http;
 using Newtonsoft.Json;
 
-namespace _0_Framework.Application
+namespace _01_Framework.Application
 {
     public class AuthHelper : IAuthHelper
     {
@@ -29,12 +29,12 @@ namespace _0_Framework.Application
 
         public AuthViewModel CurrentAccountInfo()
         {
-            var resault = new  AuthViewModel();
+            var resault = new AuthViewModel();
             if (!IsAuthenticated())
                 return resault;
 
             var claims = _contextAccessor.HttpContext.User.Claims.ToList();
-            resault.Id =long.Parse(claims.FirstOrDefault(x => x.Type == "AccountId").Value);
+            resault.Id = long.Parse(claims.FirstOrDefault(x => x.Type == "AccountId").Value);
             resault.Username = claims.FirstOrDefault(x => x.Type == "UserName").Value;
             resault.RoleId = long.Parse(claims.FirstOrDefault(x => x.Type == ClaimTypes.Role).Value);
             resault.Fullname = claims.FirstOrDefault(x => x.Type == ClaimTypes.Name).Value;
@@ -55,7 +55,7 @@ namespace _0_Framework.Application
 
         public List<long> GetPermissions()
         {
-            if(!IsAuthenticated())
+            if (!IsAuthenticated())
             {
                 return new List<long>();
             }

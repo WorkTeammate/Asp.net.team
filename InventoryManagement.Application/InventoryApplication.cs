@@ -1,4 +1,4 @@
-﻿using _0_Framework.Application;
+﻿using _01_Framework.Application;
 using InventoryManagement.Application.Contracts.Inventory;
 using InventoryManagement.Domain.InventoryAgg;
 using InventoryManagement.EfCore.Repository;

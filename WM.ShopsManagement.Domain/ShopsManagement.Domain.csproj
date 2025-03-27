@@ -26,8 +26,4 @@
     <ProjectReference Include="..\ShopsManagement.Application.Contracts\ShopsManagement.Application.Contracts.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="ProductCategoryAgg\" />
-  </ItemGroup>
-
 </Project>

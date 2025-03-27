@@ -1,4 +1,4 @@
-﻿namespace _0_Framework.Application.Email
+﻿namespace _01_Framework.Application.Email
 {
     public interface IEmailService
     {

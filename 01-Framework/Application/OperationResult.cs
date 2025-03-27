@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace _0_Framework.Application
+namespace _01_Framework.Application
 {
     public class OperationResult
     {
@@ -14,7 +14,7 @@ namespace _0_Framework.Application
         {
             IsSuccessful = false;
         }
-        public OperationResult Successful(string message="عملیات با موفقیت انجام شد")
+        public OperationResult Successful(string message = "عملیات با موفقیت انجام شد")
         {
             IsSuccessful = true;
             Message = message;

@@ -1,4 +1,5 @@
-﻿using _0_Framework.Domain;
+﻿using _01_Framework.Domain;
+using ShopsManagement.Domain.ProductCategoryAgg;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -20,13 +21,16 @@ namespace ShopsManagement.Domain.ProductAgg
         public string MetaDescription { get; private set; }
         public bool IsDeleted { get; private set; }
 
+        public ProductCategory Category { get; private set; }
+        public long CategoryId { get; set; }
+
         protected Product()
         {
             
         }
 
         public Product(string name, string shortDescription, string description, string picture,
-            string pictureAlt, string pictureTitle, string slug, string keywords, string metaDescription)
+            string pictureAlt, string pictureTitle, string slug, string keywords, string metaDescription , long categoryid)
         {
             Name = name;
             ShortDescription = shortDescription;
@@ -37,10 +41,11 @@ namespace ShopsManagement.Domain.ProductAgg
             Slug = slug;
             Keywords = keywords;
             MetaDescription = metaDescription;
+            CategoryId = categoryid;
             IsDeleted = false;
         }
         public void Edit(string name, string shortDescription, string description, string picture,
-            string pictureAlt, string pictureTitle, string slug, string keywords, string metaDescription)
+            string pictureAlt, string pictureTitle, string slug, string keywords, string metaDescription,long categoryid)
         {
             Name = name;
             ShortDescription = shortDescription;
@@ -51,6 +56,7 @@ namespace ShopsManagement.Domain.ProductAgg
             Slug = slug;
             Keywords = keywords;
             MetaDescription = metaDescription;
+            CategoryId = categoryid;
 
         }
 

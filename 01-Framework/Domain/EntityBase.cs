@@ -4,11 +4,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace _0_Framework.Domain
+namespace _01_Framework.Domain
 {
     public class EntityBase
     {
-        public long Id { get;private set; }
+        public long Id { get; private set; }
         public DateTime CreationDate { get; set; }
         public EntityBase()
         {

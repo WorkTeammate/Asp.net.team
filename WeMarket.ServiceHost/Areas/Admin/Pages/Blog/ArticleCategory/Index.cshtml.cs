@@ -1,7 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
-using _0_Framework.Infrastructure;
 using BlogManagement.Application.Contracts.ArticleCategory;
 
 namespace WeMarket.ServiceHost.Areas.Admin.Pages.Blog.ArticleCategory

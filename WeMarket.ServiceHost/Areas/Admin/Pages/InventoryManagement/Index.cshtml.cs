@@ -1,4 +1,3 @@
-using _0_Framework.Infrastructure;
 using InventoryManagement.Application;
 using InventoryManagement.Application.Contracts.Inventory;
 using Microsoft.AspNetCore.Authorization;
@@ -8,7 +7,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using ShopsManagement.Application.Contracts.Products;
 
 
-namespace WeMarket.ServiceHost.Areas.Pages.InventoryManagement
+namespace WeMarket.ServiceHost.Areas.Admin.Pages.InventoryManagement
 {
     public class IndexModel : PageModel
     {
@@ -92,7 +91,7 @@ namespace WeMarket.ServiceHost.Areas.Pages.InventoryManagement
         public IActionResult OnGetLog(long id)
         {
             var log = _inventoryApplication.GetOperationLog(id);
-            
+
             return Partial("OperationLog", log);
         }
     }

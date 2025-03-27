@@ -1,5 +1,5 @@
-using _0_Framework.Application;
-using _0_Framework.Infrastructure;
+
+using _01_Framework.Application;
 using BlogManagament.Infrastructure.EFCore.Extentions;
 using BlogManagement.Application.Extentions;
 using DiscountManagement.Application.Extentions;
@@ -9,7 +9,8 @@ using InventoryManagement.EfCore.Extentions;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using ShopsManagement.Application.Extentions;
 using ShopsManagement.Infrastructure.EFcore.Extentions;
-using SM.LampShade;
+using WeMarket.ServiceHost;
+
 
 var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddHttpContextAccessor();
@@ -39,6 +40,7 @@ builder.Services.AddBlogInfrastructureDependencies(builder.Configuration);
 //Auth 
 builder.Services.AddTransient<IAuthHelper, AuthHelper>();
 builder.Services.AddSingleton<IPasswordHasher, PasswordHasher>();
+builder.Services.AddSingleton<IFileUploader, FileUploader>();
 //Auth 
 
 
