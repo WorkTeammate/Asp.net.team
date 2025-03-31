@@ -17,6 +17,7 @@
         public bool IsDeleted { get; set; }
         public string ProductCategory { get; set; }
         public long CategoryId { get; set; }
+        public long UserId { get; set; }
 
     }
 }

@@ -1,5 +1,7 @@
 
 using _01_Framework.Application;
+using AccountManagement.Application.Extentions;
+using AccountManagement.Infrastructure.EFCore.Extentions;
 using BlogManagament.Infrastructure.EFCore.Extentions;
 using BlogManagement.Application.Extentions;
 using DiscountManagement.Application.Extentions;
@@ -35,6 +37,11 @@ builder.Services.AddDiscountApplicationDependencies();
 builder.Services.AddBlogApplicationConfiguration();
 builder.Services.AddBlogInfrastructureDependencies(builder.Configuration);
 //BlogManagement 
+
+//Account 
+builder.Services.AddAccountInfrastructureDependencies(builder.Configuration);
+builder.Services.AddAccountApplicationConfiguration();
+//Account 
 
 
 //Auth 
