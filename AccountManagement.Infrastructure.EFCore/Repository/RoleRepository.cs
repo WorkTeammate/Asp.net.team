@@ -6,6 +6,7 @@ using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -26,9 +27,10 @@ namespace AccountManagement.Infrastructure.EFCore.Repository
             {
                 Id = x.Id,
                 Name = x.Name,
-                MappedPermissions = MapPermissions(x.Permissions)
+                MappedPermissions = MapPermissions(x.Permission)
+
             }).AsNoTracking()
-           .FirstOrDefault(x => x.Id == id);
+             .FirstOrDefault(x => x.Id == id);
 
             role.Permissions = role.MappedPermissions.Select(x => x.Code).ToList();
 

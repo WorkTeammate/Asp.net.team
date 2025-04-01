@@ -1,5 +1,6 @@
 ﻿
 using _01_Framework.Application;
+using AccountManagement.Application.Contracts.Account;
 using Microsoft.AspNetCore.Http;
 using ShopsManagement.Application.Contracts.ProductCategory;
 using System;
@@ -24,8 +25,10 @@ namespace ShopsManagement.Application.Contracts.Products
         public string MetaDescription { get; set; }
         [Range(1, 100000, ErrorMessage = ValidationMessages.IsRequired)]
         public long CategoryId { get; set; }
-        public long UserId { get; set; }
         public List<ProductCategoryViewModel> Categories { get; set; }
+
+        public long AccountId { get; set; }
+        public List<AccountViewModel> Accounts { get; set; }
 
     }
 }

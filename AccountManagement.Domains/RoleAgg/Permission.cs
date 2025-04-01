@@ -18,7 +18,10 @@ namespace AccountManagement.Domain.RoleAgg
         {
             Code = code;
         }
+        public Permission()
+        {
 
+        }
         public Permission(int code, string name)
         {
             Name = name;

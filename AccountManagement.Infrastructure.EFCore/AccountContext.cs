@@ -1,5 +1,6 @@
 ﻿using AccountManagement.Domain.AccountAgg;
 using AccountManagement.Domain.RoleAgg;
+using AccountManagement.Infrastructure.EFCore.Mapping;
 using Microsoft.EntityFrameworkCore;
 
 namespace AccountManagement.Infrastructure.EFCore
@@ -16,7 +17,7 @@ namespace AccountManagement.Infrastructure.EFCore
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.ApplyConfigurationsFromAssembly(typeof(Account).Assembly);
+            modelBuilder.ApplyConfigurationsFromAssembly(typeof(AccountMapping).Assembly);
             base.OnModelCreating(modelBuilder);
         }
     }

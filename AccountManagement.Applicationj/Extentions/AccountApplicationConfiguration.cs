@@ -1,4 +1,5 @@
-﻿using AccountManagement.Application.Contracts.Account;
+﻿using _01_Framework.Application;
+using AccountManagement.Application.Contracts.Account;
 using AccountManagement.Application.Contracts.Role;
 using Microsoft.Extensions.DependencyInjection;
 using System;
@@ -15,6 +16,7 @@ namespace AccountManagement.Application.Extentions
         {
             services.AddScoped<IAccountApplication, AccountApplication>();
             services.AddScoped<IRoleApplication, RoleApplication>();
+
         }
     }
 }

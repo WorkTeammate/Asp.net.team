@@ -1,7 +1,9 @@
+using _01_Framework.Infrastructure;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using ShopsManagement.Application.Contracts.Products;
+using ShopsManagement.Configuration.Permissions;
 
 namespace WeMarket.ServiceHost.Areas.Admin.Pages.ProductsManagement.Products
 {
@@ -18,11 +20,13 @@ namespace WeMarket.ServiceHost.Areas.Admin.Pages.ProductsManagement.Products
         {
             _productApplication = productApplication;
         }
+        [NeedsPermission(ShopsPermissions.ListProduct)]
 
         public void OnGet(ProductSearchModel searchModel)
         {
             Product = _productApplication.Search(searchModel);
         }
+
         public IActionResult OnGetCreate()
         {
             var command = new CreateProduct
@@ -31,6 +35,8 @@ namespace WeMarket.ServiceHost.Areas.Admin.Pages.ProductsManagement.Products
             };
             return Partial("./Create", command);
         }
+        [NeedsPermission(ShopsPermissions.CreateProduct)]
+
         public IActionResult OnPostCreate(CreateProduct command)
         {
             var result = _productApplication.CreateProduct(command);
@@ -50,6 +56,8 @@ namespace WeMarket.ServiceHost.Areas.Admin.Pages.ProductsManagement.Products
                 return Page();
             return Partial("Edit", Product);
         }
+        [NeedsPermission(ShopsPermissions.EditProduct)]
+
         public IActionResult OnPostEdit(EditProduct command)
         {
             var result = _productApplication.EditProduct(command);

@@ -47,6 +47,7 @@ namespace AccountManagement.Infrastructure.EFCore.Repository
                 Fullname=x.Fullname,
                 Mobile = x.Mobile,
                 Username=x.Username,
+                RoleId=x.RoleId,
             }).FirstOrDefault(x => x.Id == id);
         }
 
@@ -60,6 +61,7 @@ namespace AccountManagement.Infrastructure.EFCore.Repository
                 Username=x.Username,
                 IsDeleted=x.IsDeleted,
                 Role=x.Role.Name,
+                RoleId=x.RoleId,
                 ProfilePhoto=x.ProfilePhoto,
                 CreationDate=x.CreationDate.ToFarsi()
             });

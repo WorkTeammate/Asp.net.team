@@ -3,6 +3,7 @@ using AccountManagement.Application.Contracts.Role;
 using Microsoft.AspNetCore.Http;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
@@ -13,7 +14,11 @@ namespace AccountManagement.Application.Contracts.Account
     public class CreateAccount
     {
         public string Fullname { get; set; }
+        [Required(ErrorMessage = ValidationMessages.IsRequired)]
         public string Username { get; set; }
+        [Required(ErrorMessage = ValidationMessages.IsRequired)]
+        [MinLength(8,ErrorMessage = ValidationMessages.PasswordMin)]
+
         public string Password { get; set; }
         public string Mobile { get; set; }
         public long RoleId { get; set; }

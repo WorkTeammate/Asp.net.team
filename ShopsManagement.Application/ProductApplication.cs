@@ -1,4 +1,5 @@
 ﻿using _01_Framework.Application;
+using AccountManagement.Domain.AccountAgg;
 using Microsoft.EntityFrameworkCore;
 using ShopsManagement.Application.Contracts.Products;
 using ShopsManagement.Domain.ProductAgg;
@@ -13,10 +14,12 @@ namespace ShopsManagement.Application
     public class ProductApplication : IProductApplication
     {
         private readonly IProductRepository _productRepository;
+        private readonly IAuthHelper _authHelper;
 
-        public ProductApplication(IProductRepository productRepository)
+        public ProductApplication(IProductRepository productRepository, IAuthHelper authHelper)
         {
             _productRepository = productRepository;
+            _authHelper = authHelper;
         }
 
         public OperationResult CreateProduct(CreateProduct command)
@@ -29,7 +32,7 @@ namespace ShopsManagement.Application
 
             var product = new Product(command.Name, command.ShortDescription, command.Description,
                 command.Picture, command.PictureAlt, command.PictureTitle, slug, command.Keywords,
-                command.MetaDescription,command.CategoryId,1);
+                command.MetaDescription,command.CategoryId);
             _productRepository.Create(product);
             _productRepository.SaveChanges();
             return operation.Successful();
@@ -46,9 +49,10 @@ namespace ShopsManagement.Application
                 return operation.Failed(ApplicationMessages.DuplicatedRecord);
 
             var slug = command.Slug.Slugify();
+
             product.Edit(command.Name, command.ShortDescription, command.Description,
                 command.Picture, command.PictureAlt, command.PictureTitle, slug, command.Keywords
-                , command.MetaDescription,command.CategoryId,1);
+                , command.MetaDescription,command.CategoryId);
 
             _productRepository.SaveChanges();
             return operation.Successful();

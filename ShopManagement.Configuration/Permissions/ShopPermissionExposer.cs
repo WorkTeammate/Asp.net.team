@@ -14,32 +14,27 @@ namespace ShopsManagement.Configuration.Permissions
             return new Dictionary<string, List<PermissionDto>>
             {
                 {
-                    "Market", new List<PermissionDto>
-                    {
-                        new PermissionDto(ShopsPermissions.ListMarket, "لیست فروشگاه ها"),
-                        new PermissionDto(ShopsPermissions.CreateMarket, "ایجاد فروشگاه "),
-                        new PermissionDto(ShopsPermissions.EditMarket, "ویرایش فروشگاه "),
-                        new PermissionDto(ShopsPermissions.SearchMarket, "جستجو فروشگاه "),
-                    }
-                },
-                {
-                    "MarketCategory", new List<PermissionDto>
-                    {
-                        new PermissionDto(ShopsPermissions.ListMarketCategory, "لیست  دسته بندی فروشگاه ها"),
-                        new PermissionDto(ShopsPermissions.CreateMarketCategory, "ایجاد دسته بندی فروشگاه "),
-                        new PermissionDto(ShopsPermissions.EditMarketCategory, "ویرایش دسته بندی فروشگاه "),
-                        new PermissionDto(ShopsPermissions.SearchMarketCategory, "جستجو دسته بندی فروشگاه "),
-                    }
-                },
-                {
                     "Product", new List<PermissionDto>
                     {
-                        new PermissionDto(ShopsPermissions.ListProducts, "لیست محصول ها"),
+                        new PermissionDto(ShopsPermissions.ListProduct, "لیست محصول ها"),
                         new PermissionDto(ShopsPermissions.CreateProduct, "ایجاد محصول ها "),
                         new PermissionDto(ShopsPermissions.EditProduct, "ویرایش محصول ها "),
-                        new PermissionDto(ShopsPermissions.SearchProducts, "جستجو محصول ها "),
+                        new PermissionDto(ShopsPermissions.SearchProduct, "جستجو محصول ها "),
+                        new PermissionDto(ShopsPermissions.RemoveProduct, "حذف محصول ها "),
+                        new PermissionDto(ShopsPermissions.RestoreProduct, "بازگردانی محصول ها "),
                     }
-                }
+                },
+                  {
+                    "ProductCategory", new List<PermissionDto>
+                    {
+                        new PermissionDto(ShopsPermissions.ListProductCategory, "لیست محصول ها"),
+                        new PermissionDto(ShopsPermissions.CreateProductCategory, "ایجاد محصول ها "),
+                        new PermissionDto(ShopsPermissions.EditProductCategory, "ویرایش محصول ها "),
+                        new PermissionDto(ShopsPermissions.SearchProductCategory, "جستجو محصول ها "),
+                        new PermissionDto(ShopsPermissions.RemoveProductCategory, "حذف  دسته بندی محصول ها "),
+                        new PermissionDto(ShopsPermissions.RestoreProductCategory, "بازگردانی دسته بندی محصول ها "),
+                    }
+                },
             };
         }
     }

@@ -12,5 +12,6 @@ namespace _01_Framework.Application
         public const string MaxLength = "این فیلد بیشتر از حد مجاز کارکتر دارد";
         public const string MaxFileSize = "فایل حجیم تر از حد مجاز است";
         public const string InvalidFileFormat = "فرمت فایل مجاز نیست";
+        public const string PasswordMin = "پسوورد حداقل باید 8 کارکتر باشد";
     }
 }

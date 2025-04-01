@@ -23,10 +23,6 @@ namespace AccountManagement.Domain.AccountAgg
         public long RoleId { get; private set; }
         public Role Role { get; private set; }
 
-        protected Account()
-        {
-            
-        }
 
         public Account(string fullname, string username, string password, string mobile, string profilePhoto, long roleId)
         {
@@ -35,12 +31,12 @@ namespace AccountManagement.Domain.AccountAgg
             Password = password;
             Mobile = mobile;
             if (string.IsNullOrEmpty(profilePhoto))
-                profilePhoto = "UserDefaultLogo.png";
+                profilePhoto = "Account/UserDefaultLogo.png";
             ProfilePhoto = profilePhoto;
             IsDeleted = false;
 
             if (roleId == 0)
-                roleId = 1;
+                roleId = 2;
             RoleId = roleId;
         }
 
@@ -52,7 +48,7 @@ namespace AccountManagement.Domain.AccountAgg
             ProfilePhoto = profilePhoto;
 
             if (roleid == 0)
-                roleid = 1;
+                roleid = 2;
             RoleId = roleid;
         }
 

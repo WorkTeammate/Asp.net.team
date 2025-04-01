@@ -30,6 +30,7 @@ namespace ShopsManagement.Infrastructure.EFcore.Mapping
                 .WithMany(x => x.Products)
                     .HasForeignKey(x => x.CategoryId);
 
+
         }
     }
 }

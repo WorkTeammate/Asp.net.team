@@ -1,4 +1,5 @@
 ﻿using _01_Framework.Domain;
+using AccountManagement.Domain.AccountAgg;
 using Microsoft.Identity.Client;
 using ShopsManagement.Domain.ProductCategoryAgg;
 using System;
@@ -21,13 +22,6 @@ namespace ShopsManagement.Domain.ProductAgg
         public string Keywords { get; private set; }
         public string MetaDescription { get; private set; }
         public bool IsDeleted { get; private set; }
-
-        //User 
-        public long UserId { get; private set; }
-
-        //public User Users { get; private set; }
-
-        //User 
         public ProductCategory Category { get; private set; }
         public long CategoryId { get; set; }
 
@@ -38,7 +32,7 @@ namespace ShopsManagement.Domain.ProductAgg
 
         public Product(string name, string shortDescription, string description, string picture,
             string pictureAlt, string pictureTitle, string slug
-            , string keywords, string metaDescription , long categoryid , long userid)
+            , string keywords, string metaDescription , long categoryid)
         {
             Name = name;
             ShortDescription = shortDescription;
@@ -50,12 +44,11 @@ namespace ShopsManagement.Domain.ProductAgg
             Keywords = keywords;
             MetaDescription = metaDescription;
             CategoryId = categoryid;
-            UserId = userid;
             IsDeleted = false;
         }
         public void Edit(string name, string shortDescription, string description, string picture,
             string pictureAlt, string pictureTitle, string slug
-            , string keywords, string metaDescription,long categoryid, long userid)
+            , string keywords, string metaDescription,long categoryid)
         {
             Name = name;
             ShortDescription = shortDescription;
@@ -67,7 +60,6 @@ namespace ShopsManagement.Domain.ProductAgg
             Keywords = keywords;
             MetaDescription = metaDescription;
             CategoryId = categoryid;
-            UserId = userid;
 
         }
 

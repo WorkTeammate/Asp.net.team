@@ -8,23 +8,21 @@ namespace ShopsManagement.Configuration.Permissions
 {
     public class ShopsPermissions
     {
-        //Market 
-        public const int CreateMarket = 1;
-        public const int EditMarket = 2;
-        public const int ListMarket = 3;
-        public const int SearchMarket = 4;
+        //Product 
+        public const int CreateProduct = 1;
+        public const int EditProduct = 2;
+        public const int ListProduct = 3;
+        public const int SearchProduct = 4;
+        public const int RemoveProduct = 5;
+        public const int RestoreProduct = 6;
 
-        //Market Category
-        public const int CreateMarketCategory = 10;
-        public const int EditMarketCategory = 11;
-        public const int ListMarketCategory = 12;
-        public const int SearchMarketCategory = 13;
+        //Product Category
+        public const int CreateProductCategory = 10;
+        public const int EditProductCategory = 11;
+        public const int ListProductCategory = 12;
+        public const int SearchProductCategory = 13;
+        public const int RemoveProductCategory = 14;
+        public const int RestoreProductCategory = 15;
 
-
-        //Product
-        public const int ListProducts = 20;
-        public const int SearchProducts = 21;
-        public const int CreateProduct = 22;
-        public const int EditProduct = 23;
     }
 }

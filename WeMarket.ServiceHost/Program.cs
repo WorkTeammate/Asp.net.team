@@ -1,5 +1,6 @@
 
 using _01_Framework.Application;
+using _01_Framework.Infrastructure;
 using AccountManagement.Application.Extentions;
 using AccountManagement.Infrastructure.EFCore.Extentions;
 using BlogManagament.Infrastructure.EFCore.Extentions;
@@ -45,7 +46,7 @@ builder.Services.AddAccountApplicationConfiguration();
 
 
 //Auth 
-builder.Services.AddTransient<IAuthHelper, AuthHelper>();
+builder.Services.AddSingleton<IAuthHelper, AuthHelper>();
 builder.Services.AddSingleton<IPasswordHasher, PasswordHasher>();
 builder.Services.AddSingleton<IFileUploader, FileUploader>();
 //Auth 
@@ -53,6 +54,53 @@ builder.Services.AddSingleton<IFileUploader, FileUploader>();
 
 // sevices inside of Extention
 
+builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
+          .AddCookie(CookieAuthenticationDefaults.AuthenticationScheme, o =>
+          {
+              o.LoginPath = new PathString("/Account");
+              o.LogoutPath = new PathString("/Account");
+              o.AccessDeniedPath = new PathString("/AccessDenied");
+          });
+
+builder.Services.AddAuthorization(options =>
+{
+    options.AddPolicy("AdminArea",
+        builder => builder.RequireRole(new List<string> { Roles.Admin }));
+
+    options.AddPolicy("Blog",
+        builder => builder.RequireRole(new List<string> { Roles.Admin }));
+
+    options.AddPolicy("Discount",
+        builder => builder.RequireRole(new List<string> { Roles.Admin }));
+
+    options.AddPolicy("Account",
+        builder => builder.RequireRole(new List<string> { Roles.Admin }));
+
+    options.AddPolicy("Inventory",
+    builder => builder.RequireRole(new List<string> { Roles.Admin }));
+
+    options.AddPolicy("Product",
+builder => builder.RequireRole(new List<string> { Roles.Admin }));
+});
+
+builder.Services.AddCors(options => options.AddPolicy("MyPolicy", builder =>
+    builder
+        .WithOrigins("https://localhost:7270/")
+        .AllowAnyHeader()
+        .AllowAnyMethod()));
+
+
+builder.Services.AddRazorPages()
+    .AddMvcOptions(options => options.Filters.Add<SecurityPageFilter>())
+    .AddRazorPagesOptions(options =>
+    {
+        options.Conventions.AuthorizeAreaFolder("Admin", "/", "AdminArea");
+        options.Conventions.AuthorizeAreaFolder("Admin", "/Blog", "Blog");
+        options.Conventions.AuthorizeAreaFolder("Admin", "/Discounts", "Discount");
+        options.Conventions.AuthorizeAreaFolder("Admin", "/AccountsManagement", "Account");
+        options.Conventions.AuthorizeAreaFolder("Admin", "/InventoryManagement", "Inventory");
+        options.Conventions.AuthorizeAreaFolder("Admin", "/ProductsManagement", "Product");
+    });
 // Add services to the container.
 builder.Services.AddRazorPages();
 
@@ -77,6 +125,8 @@ app.UseRouting();
 app.UseCookiePolicy();
 
 app.UseAuthorization();
+
+app.UseCors("MyPolicy");
 
 app.MapRazorPages();
 

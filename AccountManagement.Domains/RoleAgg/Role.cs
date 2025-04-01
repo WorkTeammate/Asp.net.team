@@ -12,7 +12,7 @@ namespace AccountManagement.Domain.RoleAgg
     {
         public string Name { get; private set; }
         public List<Account> Accounts { get; private set; }
-        public List<Permission> Permissions { get; private set; }
+        public List<Permission> Permission { get; private set; }
 
         protected Role()
         {
@@ -21,13 +21,15 @@ namespace AccountManagement.Domain.RoleAgg
         public Role(string name, List<Permission> permissions)
         {
             Name = name;
-            Permissions = permissions;
+            Permission = permissions;
+            Accounts = new List<Account>();
+
         }
 
         public void Edit(string name, List<Permission> permissions)
         {
             Name = name;
-            Permissions = permissions;
+            Permission = permissions;
         }
     }
 }

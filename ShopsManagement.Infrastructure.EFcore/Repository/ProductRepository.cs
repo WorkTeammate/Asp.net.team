@@ -34,6 +34,7 @@ namespace ShopsManagement.Infrastructure.EFcore.Repository
                 PictureTitle = x.PictureTitle,
                 ShortDescription = x.ShortDescription,
                 Slug = x.Slug,
+                
 
             }).OrderByDescending(x => x.Id).FirstOrDefault(x => x.Id == id);
 
@@ -51,7 +52,7 @@ namespace ShopsManagement.Infrastructure.EFcore.Repository
 
         public List<ProductViewModel> Search(ProductSearchModel searchModel)
         {
-            var query = _context.Products.Select(x => new ProductViewModel
+            var query = _context.Products.Include(x=>x.Category).Select(x => new ProductViewModel
             {
                 Id = x.Id,
                 CreationDate = x.CreationDate.ToFarsi(),
@@ -64,7 +65,8 @@ namespace ShopsManagement.Infrastructure.EFcore.Repository
                 PictureTitle = x.PictureTitle,
                 ShortDescription = x.ShortDescription,
                 Slug = x.Slug,
-                IsDeleted=x.IsDeleted,              
+                IsDeleted=x.IsDeleted, 
+                Category=x.Category.Name,
             });
 
 

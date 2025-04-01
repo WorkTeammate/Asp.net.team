@@ -4,6 +4,7 @@ using AccountManagement.Infrastructure.EFCore;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace AccountManagement.Infrastructure.EFCore.Migrations
 {
     [DbContext(typeof(AccountContext))]
-    partial class AccountContextModelSnapshot : ModelSnapshot
+    [Migration("20250401165010_Add-Account")]
+    partial class AddAccount
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -34,8 +37,7 @@ namespace AccountManagement.Infrastructure.EFCore.Migrations
                         .HasColumnType("datetime2");
 
                     b.Property<string>("Fullname")
-                        .HasMaxLength(150)
-                        .HasColumnType("nvarchar(150)");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<bool>("IsDeleted")
                         .HasColumnType("bit");
@@ -53,14 +55,37 @@ namespace AccountManagement.Infrastructure.EFCore.Migrations
                         .HasColumnType("bigint");
 
                     b.Property<string>("Username")
-                        .HasMaxLength(30)
-                        .HasColumnType("nvarchar(30)");
+                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
 
                     b.HasIndex("RoleId");
 
-                    b.ToTable("Account", (string)null);
+                    b.ToTable("Account");
+                });
+
+            modelBuilder.Entity("AccountManagement.Domain.RoleAgg.Permission", b =>
+                {
+                    b.Property<long>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bigint");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<long>("Id"));
+
+                    b.Property<int>("Code")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Name")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<long>("RoleId")
+                        .HasColumnType("bigint");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("RoleId");
+
+                    b.ToTable("Permission");
                 });
 
             modelBuilder.Entity("AccountManagement.Domain.RoleAgg.Role", b =>
@@ -75,13 +100,11 @@ namespace AccountManagement.Infrastructure.EFCore.Migrations
                         .HasColumnType("datetime2");
 
                     b.Property<string>("Name")
-                        .IsRequired()
-                        .HasMaxLength(100)
-                        .HasColumnType("nvarchar(100)");
+                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
 
-                    b.ToTable("Role", (string)null);
+                    b.ToTable("Role");
                 });
 
             modelBuilder.Entity("AccountManagement.Domain.AccountAgg.Account", b =>
@@ -95,40 +118,22 @@ namespace AccountManagement.Infrastructure.EFCore.Migrations
                     b.Navigation("Role");
                 });
 
-            modelBuilder.Entity("AccountManagement.Domain.RoleAgg.Role", b =>
+            modelBuilder.Entity("AccountManagement.Domain.RoleAgg.Permission", b =>
                 {
-                    b.OwnsMany("AccountManagement.Domain.RoleAgg.Permission", "Permission", b1 =>
-                        {
-                            b1.Property<long>("Id")
-                                .ValueGeneratedOnAdd()
-                                .HasColumnType("bigint");
+                    b.HasOne("AccountManagement.Domain.RoleAgg.Role", "Role")
+                        .WithMany("Permission")
+                        .HasForeignKey("RoleId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
-                            SqlServerPropertyBuilderExtensions.UseIdentityColumn(b1.Property<long>("Id"));
-
-                            b1.Property<int>("Code")
-                                .HasColumnType("int");
-
-                            b1.Property<long>("RoleId")
-                                .HasColumnType("bigint");
-
-                            b1.HasKey("Id");
-
-                            b1.HasIndex("RoleId");
-
-                            b1.ToTable("RolePermissions", (string)null);
-
-                            b1.WithOwner("Role")
-                                .HasForeignKey("RoleId");
-
-                            b1.Navigation("Role");
-                        });
-
-                    b.Navigation("Permission");
+                    b.Navigation("Role");
                 });
 
             modelBuilder.Entity("AccountManagement.Domain.RoleAgg.Role", b =>
                 {
                     b.Navigation("Accounts");
+
+                    b.Navigation("Permission");
                 });
 #pragma warning restore 612, 618
         }

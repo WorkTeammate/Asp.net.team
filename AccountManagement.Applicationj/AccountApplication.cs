@@ -2,6 +2,7 @@
 using AccountManagement.Application.Contracts.Account;
 using AccountManagement.Domain.AccountAgg;
 using AccountManagement.Domain.RoleAgg;
+using Azure;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -55,7 +56,8 @@ namespace AccountManagement.Application
             if (account == null)
                 return operation.Failed(ApplicationMessages.RecordNotFound);
 
-            if (_accountRepository.Exists(x => (x.Username == x.Username || x.Mobile == x.Mobile) && x.Id != command.Id))
+            if (_accountRepository.Exists(x =>
+                (x.Username == command.Username || x.Mobile == command.Mobile) && x.Id != command.Id))
                 return operation.Failed(ApplicationMessages.DuplicatedRecord);
 
             var path = $"Account";
@@ -93,48 +95,26 @@ namespace AccountManagement.Application
         public OperationResult Login(Login command)
         {
             var operation = new OperationResult();
-            var UserAccount = _accountRepository.GetBy(command.Username);
-            var MobileAccount = _accountRepository.GetByMobile(command.Mobile);
+            var account = _accountRepository.GetBy(command.Username);
 
-            if (UserAccount == null && MobileAccount == null)
-                return operation.Failed(ApplicationMessages.RecordNotFound);
+            command.ProfilePicture = account.ProfilePhoto;
+            if (account == null)
+                return operation.Failed(ApplicationMessages.WrongUserPass);
 
-            if (UserAccount != null && MobileAccount == null)
-            {
-                var result = _passwordHasher.Check(UserAccount.Password, command.Password);
-                if (!result.Verified)
-                    return operation.Failed(ApplicationMessages.WrongUserPass);
-                var permissions = _roleRepository.Get(UserAccount.RoleId)
-               .Permissions
-               .Select(x => x.Code)
-               .ToList();
+            var result = _passwordHasher.Check(account.Password, command.Password);
+            if (!result.Verified)
+                return operation.Failed(ApplicationMessages.WrongUserPass);
 
-                var authViewModel = new AuthViewModel(UserAccount.Id, UserAccount.RoleId, UserAccount.Fullname
-                    , UserAccount.Username, UserAccount.Mobile, permissions);
+            var permissions = _roleRepository.Get(account.RoleId)
+                .Permission
+                .Select(x => x.Code)
+                .ToList();
 
-                _authHelper.SignIn(authViewModel);
-                return operation.Successful();
+            var authViewModel = new AuthViewModel(account.Id, account.RoleId, account.Fullname
+                , account.Username, account.Mobile, permissions, command.ProfilePicture);
 
-            }
-            if (MobileAccount != null && UserAccount == null)
-            {
-
-                if (command.Mobile == MobileAccount.Mobile)
-                {
-                    var permissions = _roleRepository.Get(UserAccount.RoleId)
-                        .Permissions
-                        .Select(x => x.Code)
-                         .ToList();
-                    var authViewModel = new AuthViewModel(UserAccount.Id, UserAccount.RoleId, UserAccount.Fullname
-                , UserAccount.Username, UserAccount.Mobile, permissions);
-                    _authHelper.SignIn(authViewModel);
-
-                }
-                else
-                    return operation.Failed(ApplicationMessages.RecordNotFound);
-                return operation.Successful();
-            }
-            return operation.Failed(ApplicationMessages.RecordNotFound);
+            _authHelper.SignIn(authViewModel);
+            return operation.Successful();
         }
 
         public void Logout()

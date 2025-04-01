@@ -22,6 +22,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\01-Framework\0-Framework.csproj" />
+    <ProjectReference Include="..\AccountManagement.Application.Contract\AccountManagement.Application.Contracts.csproj" />
   </ItemGroup>
 
 </Project>
