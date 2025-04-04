@@ -1,3 +1,4 @@
+using _01_Framework.Application;
 using InventoryManagement.Application;
 using InventoryManagement.Application.Contracts.Inventory;
 using Microsoft.AspNetCore.Authorization;
@@ -11,20 +12,23 @@ namespace WeMarket.ServiceHost.Areas.Admin.Pages.InventoryManagement
 {
     public class IndexModel : PageModel
     {
-        [TempData] public string Message { get; set; }
+        [TempData]
+        public string Message { get; set; }
         public InventorySearchModel SearchModel;
         public List<InventoryViewModel> Inventory;
         public SelectList Products;
-        public SelectList Markets;
 
         private readonly IProductApplication _productApplication;
         private readonly IInventoryApplicaton _inventoryApplication;
+        private readonly IAuthHelper _authHelper;
 
         public IndexModel(IProductApplication productApplication
-            , IInventoryApplicaton inventoryApplication)
+            , IInventoryApplicaton inventoryApplication,
+                IAuthHelper authHelper)
         {
             _productApplication = productApplication;
             _inventoryApplication = inventoryApplication;
+            _authHelper = authHelper;
         }
         public void OnGet(InventorySearchModel searchModel)
         {
@@ -42,6 +46,12 @@ namespace WeMarket.ServiceHost.Areas.Admin.Pages.InventoryManagement
 
         public JsonResult OnPostCreate(CreateInventory command)
         {
+            var account = _authHelper.CurrentAccountInfo();
+            if (account == null)
+                Message = ApplicationMessages.RecordNotFound;
+
+            command.AccountId = account.Id;
+
             var result = _inventoryApplication.Create(command);
             return new JsonResult(result);
         }
@@ -55,6 +65,11 @@ namespace WeMarket.ServiceHost.Areas.Admin.Pages.InventoryManagement
 
         public JsonResult OnPostEdit(EditInventory command)
         {
+            var account = _authHelper.CurrentAccountInfo();
+            if (account == null)
+                Message = ApplicationMessages.RecordNotFound;
+
+            command.AccountId = account.Id;
             var result = _inventoryApplication.Edit(command);
             return new JsonResult(result);
         }

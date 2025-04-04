@@ -12,15 +12,15 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace InventoryManagement.EfCore.Migrations
 {
     [DbContext(typeof(InventoryContext))]
-    [Migration("20250310084738_new-inventry")]
-    partial class newinventry
+    [Migration("20250404180713_Add-inventory")]
+    partial class Addinventory
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "9.0.1")
+                .HasAnnotation("ProductVersion", "9.0.3")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
@@ -33,14 +33,14 @@ namespace InventoryManagement.EfCore.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<long>("Id"));
 
+                    b.Property<long>("AccountId")
+                        .HasColumnType("bigint");
+
                     b.Property<DateTime>("CreationDate")
                         .HasColumnType("datetime2");
 
                     b.Property<bool>("InStock")
                         .HasColumnType("bit");
-
-                    b.Property<long>("MarketId")
-                        .HasColumnType("bigint");
 
                     b.Property<long>("ProductId")
                         .HasColumnType("bigint");

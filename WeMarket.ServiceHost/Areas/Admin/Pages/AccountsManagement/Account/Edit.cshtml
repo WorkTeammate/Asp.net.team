@@ -49,15 +49,6 @@
                 </div>
             </div>
         </div>
-        <div class="row">
-            <div class="col-md-12">
-                <div class="form-group">
-                    <label asp-for="ProfilePhoto" class="control-label">عکس پروفایل</label>
-                    <input type="file" class="form-control" asp-for="ProfilePhoto" accept="image/*">
-                    <span asp-validation-for="ProfilePhoto" class="error"></span>
-                </div>
-            </div>
-        </div>
         <input type="hidden" asp-for="Id" value="@Model.Id" />
     </div>
     <div class="modal-footer">

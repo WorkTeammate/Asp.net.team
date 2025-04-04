@@ -1,8 +1,10 @@
 ﻿using _01_Framework.Application;
 using _01_Framework.Infrastructure;
+using AccountManagement.Infrastructure.EFCore;
+using Market.ShopsManagement.Domain.ProductsAgg;
 using Microsoft.EntityFrameworkCore;
 using ShopsManagement.Application.Contracts.Products;
-using ShopsManagement.Domain.ProductAgg;
+using ShopsManagement.Domain.ProductsAgg;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,13 +13,15 @@ using System.Threading.Tasks;
 
 namespace ShopsManagement.Infrastructure.EFcore.Repository
 {
-    public class ProductRepository : RepositoryBase<long, Product>, IProductRepository
+    public class ProductRepository : RepositoryBase<long, Products>, IProductRepository
     {
         private readonly ShopsContext _context;
+        private readonly AccountContext _accountContext;
 
-        public ProductRepository(ShopsContext context) : base(context)
+        public ProductRepository(ShopsContext context, AccountContext accountContext) : base(context)
         {
             _context = context;
+            _accountContext = accountContext;
         }
 
         public EditProduct GetDetails(long id)
@@ -29,7 +33,6 @@ namespace ShopsManagement.Infrastructure.EFcore.Repository
                 Keywords = x.Keywords,
                 MetaDescription = x.MetaDescription,
                 Name = x.Name,
-                Picture = x.Picture,
                 PictureAlt = x.PictureAlt,
                 PictureTitle = x.PictureTitle,
                 ShortDescription = x.ShortDescription,
@@ -50,8 +53,14 @@ namespace ShopsManagement.Infrastructure.EFcore.Repository
             }).ToList();
         }
 
+        public string GetSlugById(long id)
+        {
+            return _context.ProductCategory.Select(x => new { x.Id, x.Slug }).FirstOrDefault(x => x.Id == id).Slug;
+        }
+
         public List<ProductViewModel> Search(ProductSearchModel searchModel)
         {
+            var account = _accountContext.Account.Select(x => new { x.Id, x.Username }).ToList();
             var query = _context.Products.Include(x=>x.Category).Select(x => new ProductViewModel
             {
                 Id = x.Id,
@@ -67,6 +76,8 @@ namespace ShopsManagement.Infrastructure.EFcore.Repository
                 Slug = x.Slug,
                 IsDeleted=x.IsDeleted, 
                 Category=x.Category.Name,
+                AccountId=x.AccountId,
+                
             });
 
 
@@ -77,7 +88,18 @@ namespace ShopsManagement.Infrastructure.EFcore.Repository
             if (!string.IsNullOrWhiteSpace(searchModel.ShortDescription))
                 query = query.Where(x => x.ShortDescription.Contains(searchModel.ShortDescription));
 
-            return query.OrderByDescending(x => x.Id).ToList();
+
+            if (searchModel.CategoryId > 0)
+                query = query.Where(x => x.CategoryId == searchModel.CategoryId);
+
+            var Products = query.OrderByDescending(x => x.Id).ToList();
+            Products.ForEach(product =>
+            {
+                product.Accounts = account.FirstOrDefault(x => x.Id == product.AccountId)?.Username;
+            });
+
+
+            return Products;
 
         }
     }

@@ -3,7 +3,6 @@ using _01_Framework.Infrastructure;
 using DiscountManagement.Application.Contracts.CustomerDiscount;
 using DiscountManagement.Domain.CustomerDiscountAgg;
 using Microsoft.EntityFrameworkCore;
-using ShopsManagement.Domain.ProductAgg;
 using ShopsManagement.Infrastructure.EFcore;
 using System;
 using System.Collections.Generic;

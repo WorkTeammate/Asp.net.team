@@ -36,11 +36,9 @@
         /// </summary>
         public long InventoryId { get; set; }
         public Inventory Inventory { get; set; }
-
-
         protected InventoryOpration()
         {
-            
+
         }
         public InventoryOpration(bool operation, long count, long operatorId, long currentCount,
             string description, long orderID, long inventoryId)

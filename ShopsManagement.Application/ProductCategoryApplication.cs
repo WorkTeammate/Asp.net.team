@@ -28,7 +28,7 @@ namespace ShopsManagement.Application
 
             var slug = command.Slug.Slugify();
 
-            var picturePath = $"{command.Slug}";
+            var picturePath = $"ProductCategory/{command.Slug}";
             var pictureName = _fileUploader.Upload(command.Picture, picturePath);
 
             var productCategpry = new ProductCategory(command.Name, command.ShortDescription, pictureName, command.PictureAlt, command.PictureTitle,
@@ -65,7 +65,7 @@ namespace ShopsManagement.Application
 
             var slug = command.Slug.Slugify();
 
-            var picturePath = $"{command.Slug}";
+            var picturePath = $"ProductCategory/{command.Slug}";
             var fileName = _fileUploader.Upload(command.Picture, picturePath);
 
             productCategory.Edit(command.Name, command.ShortDescription, fileName,

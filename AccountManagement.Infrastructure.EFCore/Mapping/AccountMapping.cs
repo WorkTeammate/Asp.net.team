@@ -1,4 +1,5 @@
 ﻿using AccountManagement.Domain.AccountAgg;
+using Market.AccountManagement.Domain.AccountAgg;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using System;

@@ -3,6 +3,7 @@ using AccountManagement.Application.Contracts.Account;
 using AccountManagement.Domain.AccountAgg;
 using AccountManagement.Domain.RoleAgg;
 using Azure;
+using Market.AccountManagement.Domain.AccountAgg;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -49,6 +50,21 @@ namespace AccountManagement.Application
             return operation.Successful();
         }
 
+        public OperationResult ChangeProfle(ChangeProfile command)
+        {
+            var operation = new OperationResult();
+            var account = _accountRepository.Get(command.Id);
+            if (account == null)
+                return operation.Failed(ApplicationMessages.RecordNotFound);
+
+            var path = $"Account";
+            var picturePath = _fileUploader.Upload(command.ProfilePhoto, path);
+
+            account.ChangeProfilePicture(picturePath);
+            _accountRepository.SaveChanges();
+            return operation.Successful();  
+        }
+
         public OperationResult Edit(EditAccount command)
         {
             var operation = new OperationResult();
@@ -60,11 +76,8 @@ namespace AccountManagement.Application
                 (x.Username == command.Username || x.Mobile == command.Mobile) && x.Id != command.Id))
                 return operation.Failed(ApplicationMessages.DuplicatedRecord);
 
-            var path = $"Account";
-            var picturePath = _fileUploader.Upload(command.ProfilePhoto, path);
 
-
-            account.Edit(command.Fullname, command.Username, command.Mobile, picturePath, command.RoleId);
+            account.Edit(command.Fullname, command.Username, command.Mobile, command.RoleId);
 
             _accountRepository.SaveChanges();
 

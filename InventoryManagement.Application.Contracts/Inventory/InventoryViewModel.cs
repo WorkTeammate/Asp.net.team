@@ -7,6 +7,8 @@
         public string Product { get; set; }
         public long ProductId { get; set; }
 
+        public long AccountId { get; set; }
+        public string Accounts { get; set; }
         public double UnitPrice { get; set; }
         public bool InStock { get; set; }
         public string CreationDate { get; set; }

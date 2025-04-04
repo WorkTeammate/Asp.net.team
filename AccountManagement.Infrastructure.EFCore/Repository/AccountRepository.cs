@@ -2,6 +2,7 @@
 using _01_Framework.Infrastructure;
 using AccountManagement.Application.Contracts.Account;
 using AccountManagement.Domain.AccountAgg;
+using Market.AccountManagement.Domain.AccountAgg;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -67,6 +68,9 @@ namespace AccountManagement.Infrastructure.EFCore.Repository
             });
             if(!string.IsNullOrWhiteSpace(searchModel.UserName))
                 query = query.Where(x=>x.Username.Contains(searchModel.UserName));
+
+            if (searchModel.Id > 0)
+                query = query.Where(x => x.Id == searchModel.Id);
 
             if (!string.IsNullOrWhiteSpace(searchModel.Mobile))
                 query = query.Where(x => x.Mobile.Contains(searchModel.Mobile));

@@ -12,26 +12,29 @@ using ShopsManagement.Infrastructure.EFcore;
 namespace ShopsManagement.Infrastructure.EFcore.Migrations
 {
     [DbContext(typeof(ShopsContext))]
-    [Migration("20250327101009_Add-Product-Category")]
-    partial class AddProductCategory
+    [Migration("20250404151812_ProductsAndCategory")]
+    partial class ProductsAndCategory
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "9.0.1")
+                .HasAnnotation("ProductVersion", "9.0.3")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
-            modelBuilder.Entity("ShopsManagement.Domain.ProductAgg.Product", b =>
+            modelBuilder.Entity("Market.ShopsManagement.Domain.ProductsAgg.Products", b =>
                 {
                     b.Property<long>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("bigint");
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<long>("Id"));
+
+                    b.Property<long>("AccountId")
+                        .HasColumnType("bigint");
 
                     b.Property<long>("CategoryId")
                         .HasColumnType("bigint");
@@ -119,7 +122,7 @@ namespace ShopsManagement.Infrastructure.EFcore.Migrations
                     b.ToTable("ProductCategory");
                 });
 
-            modelBuilder.Entity("ShopsManagement.Domain.ProductAgg.Product", b =>
+            modelBuilder.Entity("Market.ShopsManagement.Domain.ProductsAgg.Products", b =>
                 {
                     b.HasOne("ShopsManagement.Domain.ProductCategoryAgg.ProductCategory", "Category")
                         .WithMany("Products")

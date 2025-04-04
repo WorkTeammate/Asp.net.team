@@ -32,6 +32,5 @@
         /// اگر بر اساس سفارش مشتری بوده است شماره سفارش رو بزند
         /// </summary>
         public long OrderID { get; set; }
-        public long MarketId { get; set; }
     }
 }

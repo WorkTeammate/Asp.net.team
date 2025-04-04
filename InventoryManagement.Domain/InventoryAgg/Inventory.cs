@@ -1,26 +1,26 @@
 ﻿using _01_Framework.Domain;
-using ShopsManagement.Domain.ProductAgg;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-
 namespace InventoryManagement.Domain.InventoryAgg
 {
     public class Inventory:EntityBase
     {
         public long ProductId { get; private set; }
+        public long AccountId { get; private set; }
         public double UnitPrice { get; private set; }
         public bool InStock { get; private set; }
         public List<InventoryOpration> Oprations { get; private set; }
         protected Inventory() { }
 
-        public Inventory(long productId, double unitPrice)
+        public Inventory(long productId, double unitPrice , long accountid)
         {
             ProductId = productId;
             UnitPrice = unitPrice;
             InStock = false;
+            AccountId = accountid;
 
         }
         /// <summary>
@@ -65,10 +65,11 @@ namespace InventoryManagement.Domain.InventoryAgg
 
 
         }
-        public void Edit(long productId, double unitPrice)
+        public void Edit(long productId, double unitPrice , long accountId)
         {
             ProductId = productId;
             UnitPrice = unitPrice;
+            AccountId = accountId;
         }
 
 

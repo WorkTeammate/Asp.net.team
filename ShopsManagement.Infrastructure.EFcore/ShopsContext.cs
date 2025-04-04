@@ -1,13 +1,14 @@
-﻿using Microsoft.EntityFrameworkCore;
-using ShopsManagement.Domain.ProductAgg;
+﻿using Market.ShopsManagement.Domain.ProductsAgg;
+using Microsoft.EntityFrameworkCore;
 using ShopsManagement.Domain.ProductCategoryAgg;
+using ShopsManagement.Domain.ProductsAgg;
 using ShopsManagement.Infrastructure.EFcore.Mapping;
 
 namespace ShopsManagement.Infrastructure.EFcore
 {
     public class ShopsContext : DbContext
     {
-        public DbSet<Product> Products { get; set; }
+        public DbSet<Products> Products { get; set; }
         public DbSet<ProductCategory> ProductCategory { get; set; }
 
         public ShopsContext(DbContextOptions<ShopsContext> options) : base(options)
@@ -18,7 +19,7 @@ namespace ShopsManagement.Infrastructure.EFcore
         {
             base.OnModelCreating(modelBuilder);
             
-            modelBuilder.ApplyConfigurationsFromAssembly(typeof(Product).Assembly);
+            modelBuilder.ApplyConfigurationsFromAssembly(typeof(Products).Assembly);
         }
     }
 }

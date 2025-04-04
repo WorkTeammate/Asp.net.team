@@ -1,5 +1,6 @@
 ﻿using _01_Framework.Domain;
-using ShopsManagement.Domain.ProductAgg;
+using Market.ShopsManagement.Domain.ProductsAgg;
+using ShopsManagement.Domain.ProductsAgg;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -19,11 +20,11 @@ namespace ShopsManagement.Domain.ProductCategoryAgg
         public string MetaDescription { get; private set; }
         public string Slug { get; private set; }
         public bool IsDeleted { get; private set; }
-        public List<Product> Products { get; private set; }
+        public List<Products> Products { get; private set; }
 
         public ProductCategory()
         {
-            Products = new List<Product>();
+            Products = new List<Products>();
         }
 
         public ProductCategory(string name, string shortDescription, string picture
@@ -64,5 +65,6 @@ namespace ShopsManagement.Domain.ProductCategoryAgg
         {
             IsDeleted = false;
         }
+
     }
 }

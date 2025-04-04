@@ -1,6 +1,7 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Market.ShopsManagement.Domain.ProductsAgg;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
-using ShopsManagement.Domain.ProductAgg;
+using ShopsManagement.Domain.ProductsAgg;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,9 +10,9 @@ using System.Threading.Tasks;
 
 namespace ShopsManagement.Infrastructure.EFcore.Mapping
 {
-    public class ProductsMapping : IEntityTypeConfiguration<Product>
+    public class ProductsMapping : IEntityTypeConfiguration<Products>
     {
-        public void Configure(EntityTypeBuilder<Product> builder)
+        public void Configure(EntityTypeBuilder<Products> builder)
         {
             builder.ToTable("Products");
             builder.HasKey(x => x.Id);
@@ -28,7 +29,7 @@ namespace ShopsManagement.Infrastructure.EFcore.Mapping
 
             builder.HasOne(x => x.Category)
                 .WithMany(x => x.Products)
-                    .HasForeignKey(x => x.CategoryId);
+                      .HasForeignKey(x => x.CategoryId);
 
 
         }

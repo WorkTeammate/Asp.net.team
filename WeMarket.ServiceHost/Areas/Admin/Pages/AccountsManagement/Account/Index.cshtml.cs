@@ -63,7 +63,6 @@ namespace WeMarket.ServiceHost.Areas.Admin.Pages.AccountsManagement.Account
             var command = new ChangePassword { Id = id };
             return Partial("ChangePassword", command);
         }
-
         public JsonResult OnPostChangePassword(ChangePassword command)
         {
             var result = _accountApplication.ChangePassword(command);
@@ -84,6 +83,17 @@ namespace WeMarket.ServiceHost.Areas.Admin.Pages.AccountsManagement.Account
             if (!reault.IsSuccessful)
                 Message = reault.Message;
             return RedirectToPage("./Index");
+        }
+
+        public IActionResult OnGetChangeProfile(long id)
+        {
+            var command = new ChangeProfile { Id = id };
+            return Partial("ChangeProfile", command);
+        }
+        public JsonResult OnPostChangeProfile(ChangeProfile command)
+        {
+            var result = _accountApplication.ChangeProfle(command);
+            return new JsonResult(result);
         }
     }
 }

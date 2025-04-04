@@ -17,7 +17,10 @@ namespace ShopsManagement.Application.Contracts.Products
         public string Name { get; set; }
         public string ShortDescription { get; set; }
         public string Description { get; set; }
-        public string Picture { get; set; }
+
+        [FileExtentionLimitation(new string[] { ".jpeg", ".jpg", ".png" }, ErrorMessage = ValidationMessages.InvalidFileFormat)]
+        [MaxFileSize(3 * 1024 * 1024, ErrorMessage = ValidationMessages.MaxFileSize)]
+        public IFormFile Picture { get; set; }
         public string PictureAlt { get; set; }
         public string PictureTitle { get; set; }
         public string Slug { get; set; }
@@ -26,9 +29,8 @@ namespace ShopsManagement.Application.Contracts.Products
         [Range(1, 100000, ErrorMessage = ValidationMessages.IsRequired)]
         public long CategoryId { get; set; }
         public List<ProductCategoryViewModel> Categories { get; set; }
-
         public long AccountId { get; set; }
-        public List<AccountViewModel> Accounts { get; set; }
+
 
     }
 }

@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace ShopsManagement.Infrastructure.EFcore.Migrations
 {
     /// <inheritdoc />
-    public partial class AddProductCategory : Migration
+    public partial class ProductsAndCategory : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -42,14 +42,15 @@ namespace ShopsManagement.Infrastructure.EFcore.Migrations
                     Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     ShortDescription = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Description = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Picture = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    PictureAlt = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    PictureTitle = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Picture = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    PictureAlt = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    PictureTitle = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Slug = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Keywords = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    MetaDescription = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Keywords = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    MetaDescription = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     IsDeleted = table.Column<bool>(type: "bit", nullable: false),
                     CategoryId = table.Column<long>(type: "bigint", nullable: false),
+                    AccountId = table.Column<long>(type: "bigint", nullable: false),
                     CreationDate = table.Column<DateTime>(type: "datetime2", nullable: false)
                 },
                 constraints: table =>

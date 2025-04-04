@@ -14,7 +14,8 @@
       data-callback=""
       data-action="Refresh"
       enctype="multipart/form-data">
-      <input type="hidden" name="Id" value="@Model.Id" />
+    <input type="hidden" name="Id" value="@Model.Id" />
+    <input type="hidden" name="AccountId" value="@Model.AccountId" />
     <div class="modal-body">
         <div class="row">
             <div class="col-md-12">
@@ -28,8 +29,20 @@
         <div class="row">
             <div class="col-md-12">
                 <div class="form-group">
-                    <label asp-for="Picture" class="control-label">عکس محصول</label>
-                    <input type="text" class="form-control" asp-for="Picture">
+                    <label asp-for="CategoryId" class="control-label">گروه محصول</label>
+                    <select class="form-control" asp-for="CategoryId"
+                            asp-items='new SelectList(Model.Categories, "Id", "Name")'>
+                        <option value="0">گروه محصول</option>
+                    </select>
+                    <span asp-validation-for="CategoryId" class="error"></span>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <div class="form-group">
+                    <label asp-for="Picture" class="control-label">عکس</label>
+                    <input type="file" class="form-control" asp-for="Picture" accept="image/*">
                     <span asp-validation-for="Picture" class="error"></span>
                 </div>
             </div>

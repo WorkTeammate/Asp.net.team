@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace InventoryManagement.EfCore.Migrations
 {
     /// <inheritdoc />
-    public partial class newinventry : Migration
+    public partial class Addinventory : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -18,7 +18,7 @@ namespace InventoryManagement.EfCore.Migrations
                     Id = table.Column<long>(type: "bigint", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     ProductId = table.Column<long>(type: "bigint", nullable: false),
-                    MarketId = table.Column<long>(type: "bigint", nullable: false),
+                    AccountId = table.Column<long>(type: "bigint", nullable: false),
                     UnitPrice = table.Column<double>(type: "float", nullable: false),
                     InStock = table.Column<bool>(type: "bit", nullable: false),
                     CreationDate = table.Column<DateTime>(type: "datetime2", nullable: false)

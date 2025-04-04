@@ -13,6 +13,7 @@ namespace InventoryManagement.Application.Contracts.Inventory
     {
         [Range(1, 100000, ErrorMessage = ValidationMessages.IsRequired)]
         public long ProductId { get; set; }
+        public long AccountId { get; set; }
         [Range(1000, double.MaxValue, ErrorMessage = ValidationMessages.IsRequired)]
         public double UnitPrice { get; set; }
 

@@ -1,15 +1,7 @@
 ﻿using _01_Framework.Domain;
-using _01_Framework.Infrastructure;
 using AccountManagement.Domain.RoleAgg;
-using Microsoft.AspNetCore.Http;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace AccountManagement.Domain.AccountAgg
+namespace Market.AccountManagement.Domain.AccountAgg
 {
     public class Account:EntityBase
     {
@@ -22,7 +14,6 @@ namespace AccountManagement.Domain.AccountAgg
 
         public long RoleId { get; private set; }
         public Role Role { get; private set; }
-
 
         public Account(string fullname, string username, string password, string mobile, string profilePhoto, long roleId)
         {
@@ -40,12 +31,11 @@ namespace AccountManagement.Domain.AccountAgg
             RoleId = roleId;
         }
 
-        public void Edit(string fullname, string username, string mobile, string profilePhoto , long roleid)
+        public void Edit(string fullname, string username, string mobile , long roleid)
         {
             Fullname = fullname;
             Username = username;
             Mobile = mobile;
-            ProfilePhoto = profilePhoto;
 
             if (roleid == 0)
                 roleid = 2;
@@ -63,6 +53,10 @@ namespace AccountManagement.Domain.AccountAgg
         public void ChangePassword(string password)
         {
             Password = password;
+        }
+        public void ChangeProfilePicture(string profile)
+        {
+            ProfilePhoto = profile;
         }
     }
 }

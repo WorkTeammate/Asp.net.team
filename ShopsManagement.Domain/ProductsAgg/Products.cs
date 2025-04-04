@@ -1,6 +1,6 @@
 ﻿using _01_Framework.Domain;
 using AccountManagement.Domain.AccountAgg;
-using Microsoft.Identity.Client;
+using Market.AccountManagement.Domain.AccountAgg;
 using ShopsManagement.Domain.ProductCategoryAgg;
 using System;
 using System.Collections.Generic;
@@ -8,9 +8,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ShopsManagement.Domain.ProductAgg
+namespace Market.ShopsManagement.Domain.ProductsAgg
 {
-    public class Product : EntityBase
+    public class Products : EntityBase
     {
         public string Name { get; private set; }
         public string ShortDescription { get; private set; }
@@ -23,16 +23,16 @@ namespace ShopsManagement.Domain.ProductAgg
         public string MetaDescription { get; private set; }
         public bool IsDeleted { get; private set; }
         public ProductCategory Category { get; private set; }
-        public long CategoryId { get; set; }
+        public long CategoryId { get;private set; }
+        public long AccountId { get; private set; }
 
-        protected Product()
+        protected Products()
         {
             
         }
-
-        public Product(string name, string shortDescription, string description, string picture,
+        public Products(string name, string shortDescription, string description, string picture,
             string pictureAlt, string pictureTitle, string slug
-            , string keywords, string metaDescription , long categoryid)
+            , string keywords, string metaDescription, long categoryid , long accountId)
         {
             Name = name;
             ShortDescription = shortDescription;
@@ -45,10 +45,11 @@ namespace ShopsManagement.Domain.ProductAgg
             MetaDescription = metaDescription;
             CategoryId = categoryid;
             IsDeleted = false;
+            AccountId = accountId;
         }
         public void Edit(string name, string shortDescription, string description, string picture,
             string pictureAlt, string pictureTitle, string slug
-            , string keywords, string metaDescription,long categoryid)
+            , string keywords, string metaDescription, long categoryid , long accountId)
         {
             Name = name;
             ShortDescription = shortDescription;
@@ -60,6 +61,7 @@ namespace ShopsManagement.Domain.ProductAgg
             Keywords = keywords;
             MetaDescription = metaDescription;
             CategoryId = categoryid;
+            AccountId= accountId;
 
         }
 

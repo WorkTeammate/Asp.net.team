@@ -54,7 +54,7 @@
                                     <th>عکس</th>
                                     <th>نام </th>
                                     <th>توضیح کوتاه</th>
-                                    <th>گروه فروشگاه</th>
+                                    <th>آیدی کاربر</th>
                                     <th>تاریخ تولید</th>
                                     <th>عملیات</th>
                                 </tr>
@@ -65,10 +65,11 @@
                                     <tr>
                                         <td>@item.Id</td>
                                         <td>
-                                            <img src="@item.Picture" style="width: 70px; height: 70px" alt="@item.PictureAlt" title="@item.PictureTitle" />
+                                            <img src="~/AdminTheme/UploadPicture/@item.Picture" style="width: 70px; height: 70px" alt="@item.PictureAlt" title="@item.PictureTitle" />
                                         </td>
                                         <td>@item.Name</td>
                                         <td>@item.ShortDescription</td>
+                                        <td>@item.Accounts</td>
                                         <td>@item.CreationDate</td>
                                         <td>
                                             @if (item.IsDeleted == false)

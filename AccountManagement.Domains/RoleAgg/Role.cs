@@ -1,5 +1,6 @@
 ﻿using _01_Framework.Domain;
 using AccountManagement.Domain.AccountAgg;
+using Market.AccountManagement.Domain.AccountAgg;
 using System;
 using System.Collections.Generic;
 using System.Linq;

@@ -21,6 +21,7 @@ namespace AccountManagement.Application.Contracts.Account
 
         OperationResult RemoveAccount(long id);
         OperationResult RestoreAccount(long id);
+        OperationResult ChangeProfle(ChangeProfile command);
 
     }
 }
