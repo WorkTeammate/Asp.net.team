@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using ShopsManagement.Infrastructure.EFcore;
 
@@ -11,9 +12,11 @@ using ShopsManagement.Infrastructure.EFcore;
 namespace ShopsManagement.Infrastructure.EFcore.Migrations
 {
     [DbContext(typeof(ShopsContext))]
-    partial class ShopsContextModelSnapshot : ModelSnapshot
+    [Migration("20250407132649_IsPublish")]
+    partial class IsPublish
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

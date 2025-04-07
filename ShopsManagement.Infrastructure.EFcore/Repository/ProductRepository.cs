@@ -96,7 +96,8 @@ namespace ShopsManagement.Infrastructure.EFcore.Repository
                 IsDeleted = x.IsDeleted,
                 Category = x.Category.Name,
                 AccountId = x.AccountId,
-                FileProduct = x.FileProducts
+                FileProduct = x.FileProducts,
+                IsPublished = x.IsPublished,
             });
 
 

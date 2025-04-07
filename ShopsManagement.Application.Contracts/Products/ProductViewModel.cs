@@ -16,6 +16,7 @@
         public string Category { get; set; }
         public string CreationDate { get; set; }
         public bool IsDeleted { get; set; }
+        public bool IsPublished { get; set; }
         public string ProductCategory { get; set; }
         public long CategoryId { get; set; }
         public long AccountId { get; set; }

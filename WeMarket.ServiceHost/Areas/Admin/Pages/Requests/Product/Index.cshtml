@@ -1,15 +1,15 @@
 ﻿@page
-@model WeMarket.ServiceHost.Areas.Admin.Pages.ProductsManagement.Products.IndexModel
+@model WeMarket.ServiceHost.Areas.Admin.Pages.Requests.Product.IndexModel
 
 @{
-    ViewData["Title"] = "مدیریت محصولات";
+    ViewData["Title"] = "درخواست های محصولات";
 }
 
 <div class="row">
     <div class="col-sm-12">
         <h4 class="page-title pull-right">@ViewData["Title"]</h4>
         <p class="pull-left">
-            <a class="btn btn-success btn-lg" href="#showmodal=@Url.Page("./Index", "Create")">ایجاد دستی محصول جدید</a>
+            <a asp-page="./ProductsManagement/Products/Index" class="btn btn-success btn-lg">صفحه محصولات</a>
         </p>
     </div>
 </div>
@@ -42,7 +42,7 @@
     <div class="col-md-12">
         <div class="panel panel-default">
             <div class="panel-heading">
-                <h3 class="panel-title">لیست محصول ها (@Model.Product.Count())</h3>
+                <h3 class="panel-title">لیست محصول ها (@Model.Product.Where(x=>x.IsPublished==false).Count())</h3>
             </div>
             <div class="panel-body">
                 <div class="row">
@@ -61,7 +61,7 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                @foreach (var item in Model.Product.Where(x=>x.IsPublished==true))
+                                @foreach (var item in Model.Product.Where(x=>x.IsPublished==false))
                                 {
                                     <tr>
                                         <td>@item.Id</td>
@@ -83,24 +83,10 @@
                                         </td>
                                         <td>@item.CreationDate</td>
                                         <td>
-                                            @if (item.IsDeleted == false)
+                                            @if (item.IsPublished == false)
                                             {
-                                                <a class="btn btn-warning waves-effect waves-light m-b-5"
-                                                   href="#showmodal=@Url.Page("./Index", "Edit", new { id = item.Id})">
-                                                    <i class="fa fa-edit"></i> ویرایش
-                                                </a>
-                                                <a class="btn btn-primary waves-effect waves-light m-b-5"
-                                                   href="#showmodal=@Url.Page("./Index", "EditFileProduct", new { id = item.Id})">
-                                                    <i class="fa fa-edit"></i> ویرایش فایل محصول
-                                                </a>
-                                                <a class="btn btn-danger waves-effect waves-light m-b-5" asp-page-handler="Remove" asp-page="./Index" asp-route-id="@item.Id">
-                                                    <i class="md md-delete"></i> حذف
-                                                </a>
-                                            }
-                                            else if (item.IsDeleted == true)
-                                            {
-                                                <a class="btn btn-warning waves-effect waves-light m-b-5" asp-page-handler="Restore" asp-page="./Index" asp-route-id="@item.Id">
-                                                    <i class="md md-restore"></i> بازگردانی
+                                                <a class="btn btn-success waves-effect waves-light m-b-5" asp-page-handler="Publish" asp-page="./Index" asp-route-id="@item.Id">
+                                                    <i class="md md-check"></i> تایید
                                                 </a>
                                             }
                                         </td>

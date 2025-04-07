@@ -77,11 +77,11 @@ namespace ShopsManagement.Application
         {
             var opration = new OperationResult();
 
-            var market = _productRepository.Get(id);
-            if (market == null)
+            var product = _productRepository.Get(id);
+            if (product == null)
                 return opration.Failed(ApplicationMessages.RecordNotFound);
 
-            market.Remove();
+            product.Remove();
             _productRepository.SaveChanges();
             return opration.Successful();
         }
@@ -89,11 +89,11 @@ namespace ShopsManagement.Application
         {
             var opration = new OperationResult();
 
-            var market = _productRepository.Get(id);
-            if (market == null)
+            var product = _productRepository.Get(id);
+            if (product == null)
                 return opration.Failed(ApplicationMessages.RecordNotFound);
 
-            market.Restore();
+            product.Restore();
             _productRepository.SaveChanges();
             return opration.Successful();
         }
@@ -125,6 +125,19 @@ namespace ShopsManagement.Application
             var FileProductPath = _fileUploader.Upload(command.FileProduct, pathFileProduct);
 
             Product.EditFileProduct(FileProductPath);
+            _productRepository.SaveChanges();
+            return opration.Successful();
+        }
+
+        public OperationResult Published(long id)
+        {
+            var opration = new OperationResult();
+
+            var product = _productRepository.Get(id);
+            if (product == null)
+                return opration.Failed(ApplicationMessages.RecordNotFound);
+
+            product.Published();
             _productRepository.SaveChanges();
             return opration.Successful();
         }

@@ -13,6 +13,7 @@ namespace ShopsManagement.Application.Contracts.Products
         OperationResult EditProduct(EditProduct command);
         OperationResult Delete(long id);
         OperationResult Restore(long id);
+        OperationResult Published(long id);
         List<ProductViewModel> GetProducts();
         List<ProductViewModel> Search(ProductSearchModel searchModel);
         EditProduct GetDetails(long id);

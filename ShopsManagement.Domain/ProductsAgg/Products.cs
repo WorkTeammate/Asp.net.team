@@ -26,6 +26,7 @@ namespace Market.ShopsManagement.Domain.ProductsAgg
         public long CategoryId { get;private set; }
         public long AccountId { get; private set; }
         public string FileProducts { get; private set; }
+        public bool IsPublished { get;private set; }
         protected Products()
         {
             
@@ -45,6 +46,7 @@ namespace Market.ShopsManagement.Domain.ProductsAgg
             MetaDescription = metaDescription;
             CategoryId = categoryid;
             IsDeleted = false;
+            IsPublished = false;
             AccountId = accountId;
             FileProducts = fileproduct;
         }
@@ -76,6 +78,10 @@ namespace Market.ShopsManagement.Domain.ProductsAgg
         public void EditFileProduct(string fileProduct)
         {
             FileProducts = fileProduct;
+        }
+        public void Published()
+        {
+            IsPublished = true;
         }
     }
 }
