@@ -13,7 +13,7 @@ namespace BlogManagament.Infrastructure.EFCore
     {
         public DbSet<ArticleCategory> ArticleCategory { get; set; }
         public DbSet<Article> Article { get; private set; }
-        public BlogContext(DbContextOptions options) : base(options)
+        public BlogContext(DbContextOptions<BlogContext> options) : base(options)
         {
         }
         protected override void OnModelCreating(ModelBuilder modelBuilder)

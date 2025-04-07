@@ -25,14 +25,14 @@ namespace Market.ShopsManagement.Domain.ProductsAgg
         public ProductCategory Category { get; private set; }
         public long CategoryId { get;private set; }
         public long AccountId { get; private set; }
-
+        public string FileProducts { get; private set; }
         protected Products()
         {
             
         }
         public Products(string name, string shortDescription, string description, string picture,
             string pictureAlt, string pictureTitle, string slug
-            , string keywords, string metaDescription, long categoryid , long accountId)
+            , string keywords, string metaDescription, long categoryid , long accountId , string fileproduct)
         {
             Name = name;
             ShortDescription = shortDescription;
@@ -46,6 +46,7 @@ namespace Market.ShopsManagement.Domain.ProductsAgg
             CategoryId = categoryid;
             IsDeleted = false;
             AccountId = accountId;
+            FileProducts = fileproduct;
         }
         public void Edit(string name, string shortDescription, string description, string picture,
             string pictureAlt, string pictureTitle, string slug
@@ -62,7 +63,6 @@ namespace Market.ShopsManagement.Domain.ProductsAgg
             MetaDescription = metaDescription;
             CategoryId = categoryid;
             AccountId= accountId;
-
         }
 
         public void Remove()
@@ -72,6 +72,10 @@ namespace Market.ShopsManagement.Domain.ProductsAgg
         public void Restore()
         {
             IsDeleted = false;
+        }
+        public void EditFileProduct(string fileProduct)
+        {
+            FileProducts = fileProduct;
         }
     }
 }

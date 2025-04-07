@@ -1,5 +1,6 @@
 using _01_Framework.Application;
 using _01_Framework.Infrastructure;
+using InventoryManagement.Application.Contracts.Inventory;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
@@ -32,6 +33,7 @@ namespace WeMarket.ServiceHost.Areas.Admin.Pages.ProductsManagement.Products
         {
             ProductCategories = new SelectList(_productCategoryApplication.GetProductCategories(), "Id", "Name");
             Product = _productApplication.Search(searchModel);
+
         }
 
         public IActionResult OnGetCreate()
@@ -80,6 +82,27 @@ namespace WeMarket.ServiceHost.Areas.Admin.Pages.ProductsManagement.Products
 
             Product.AccountId = account.Id;
             return Partial("Edit", Product);
+        }
+        public IActionResult OnGetEditFileProduct(long id)
+        {
+            var Product = _productApplication.GetDetails(id);
+            if (Product == null)
+                return Page();
+            var command = new EditFileProduct()
+            {
+                Id = Product.Id,
+            };
+            return Partial("EditFileProduct" , command);
+        }
+        public IActionResult OnPostEditFileProduct(EditFileProduct command) 
+        {
+            var result = _productApplication.EditFileProduct(command);
+            if (result.IsSuccessful)
+            {
+                return new JsonResult(result);
+            }
+            Message = result.Message;
+            return Page();
         }
         [NeedsPermission(ShopsPermissions.EditProduct)]
 

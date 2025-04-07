@@ -67,6 +67,8 @@
 
   <ItemGroup>
     <Folder Include="wwwroot\AdminTheme\UploadPicture\Product\" />
+    <Folder Include="wwwroot\AdminTheme\UploadPicture\Product\شیرینی-خامه-ای\Files\" />
+    <Folder Include="wwwroot\AdminTheme\UploadPicture\Product\شیرینی-دانمارکی\Files\" />
   </ItemGroup>
 
 </Project>

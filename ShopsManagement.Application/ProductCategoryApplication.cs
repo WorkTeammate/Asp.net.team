@@ -13,11 +13,14 @@ namespace ShopsManagement.Application
     {
         private readonly IProductCategoryRepository _repository;
         private readonly IFileUploader _fileUploader;
+        private readonly IAuthHelper _authHelper;
 
-        public ProductCategoryApplication(IProductCategoryRepository repository, IFileUploader fileUploader)
+        public ProductCategoryApplication(IProductCategoryRepository repository
+            , IFileUploader fileUploader, IAuthHelper authHelper)
         {
             _repository = repository;
             _fileUploader = fileUploader;
+            _authHelper = authHelper;
         }
 
         public OperationResult Create(CreateProductCategory command)
@@ -31,8 +34,13 @@ namespace ShopsManagement.Application
             var picturePath = $"ProductCategory/{command.Slug}";
             var pictureName = _fileUploader.Upload(command.Picture, picturePath);
 
-            var productCategpry = new ProductCategory(command.Name, command.ShortDescription, pictureName, command.PictureAlt, command.PictureTitle,
-                command.KeyWords, command.MetaDescription, slug);
+            var account = _authHelper.CurrentAccountInfo();
+            if(account.Id < 0)
+                return operation.Failed(ApplicationMessages.RecordNotFound);
+
+            var productCategpry = new ProductCategory(command.Name, command.ShortDescription
+                , pictureName, command.PictureAlt, command.PictureTitle,
+                command.KeyWords, command.MetaDescription, slug,account.Id);
             
             _repository.Create(productCategpry);
             _repository.SaveChanges();

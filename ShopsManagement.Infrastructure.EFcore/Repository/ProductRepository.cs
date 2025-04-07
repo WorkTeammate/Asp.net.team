@@ -17,11 +17,14 @@ namespace ShopsManagement.Infrastructure.EFcore.Repository
     {
         private readonly ShopsContext _context;
         private readonly AccountContext _accountContext;
+        private readonly IAuthHelper _authHelper;
 
-        public ProductRepository(ShopsContext context, AccountContext accountContext) : base(context)
+        public ProductRepository(ShopsContext context
+            , AccountContext accountContext, IAuthHelper authHelper) : base(context)
         {
             _context = context;
             _accountContext = accountContext;
+            _authHelper = authHelper;
         }
 
         public EditProduct GetDetails(long id)
@@ -46,11 +49,27 @@ namespace ShopsManagement.Infrastructure.EFcore.Repository
 
         public List<ProductViewModel> GetProducts()
         {
-            return _context.Products.Select(x => new ProductViewModel
+            var account = _authHelper.CurrentAccountInfo();
+            if(account.Id < 0)
+                return new List<ProductViewModel>();
+
+            if(account.RoleId == Roles.AdminLong)
             {
-                Id = x.Id,
-                Name = x.Name,
-            }).ToList();
+                return _context.Products.Select(x => new ProductViewModel
+                {
+                    Id = x.Id,
+                    Name = x.Name,
+                }).ToList();
+            }
+            else
+            {
+                return _context.Products.Where(x => x.AccountId == account.Id).Select(x => new ProductViewModel
+                {
+                    Id = x.Id,
+                    Name = x.Name,
+                }).ToList();
+            }
+
         }
 
         public string GetSlugById(long id)
@@ -61,7 +80,7 @@ namespace ShopsManagement.Infrastructure.EFcore.Repository
         public List<ProductViewModel> Search(ProductSearchModel searchModel)
         {
             var account = _accountContext.Account.Select(x => new { x.Id, x.Username }).ToList();
-            var query = _context.Products.Include(x=>x.Category).Select(x => new ProductViewModel
+            var query = _context.Products.Include(x => x.Category).Select(x => new ProductViewModel
             {
                 Id = x.Id,
                 CreationDate = x.CreationDate.ToFarsi(),
@@ -74,10 +93,10 @@ namespace ShopsManagement.Infrastructure.EFcore.Repository
                 PictureTitle = x.PictureTitle,
                 ShortDescription = x.ShortDescription,
                 Slug = x.Slug,
-                IsDeleted=x.IsDeleted, 
-                Category=x.Category.Name,
-                AccountId=x.AccountId,
-                
+                IsDeleted = x.IsDeleted,
+                Category = x.Category.Name,
+                AccountId = x.AccountId,
+                FileProduct = x.FileProducts
             });
 
 

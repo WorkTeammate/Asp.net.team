@@ -7,23 +7,31 @@ namespace DiscountManagement.Application
     public class CustomerDiscountApplication : ICustomerDiscountApplication
     {
         private readonly ICustomerDiscountRepository _customerDiscountRepository;
+        private readonly IAuthHelper _authHelper;
 
-        public CustomerDiscountApplication(ICustomerDiscountRepository customerDiscountRepository)
+        public CustomerDiscountApplication(ICustomerDiscountRepository customerDiscountRepository
+            , IAuthHelper authHelper)
         {
             _customerDiscountRepository = customerDiscountRepository;
+            _authHelper = authHelper;
         }
 
         public OperationResult DefineCustomerDiscount(DefineCustomerDiscount command)
         {
             var operation = new OperationResult();
-            if (_customerDiscountRepository.Exists(x => x.ProductId == command.ProductId && x.DiscountRate == command.DiscountRate))
+            if (_customerDiscountRepository.Exists(x => x.ProductId == command.ProductId && x.DiscountRate == command.DiscountRate ))
                 return operation.Failed(ApplicationMessages.DuplicatedRecord);
 
 
             var startDate = command.StartDate.ToGeorgianDateTime();
             var EndDate = command.EndDate.ToGeorgianDateTime();
 
-            var CustomerDiscount = new CustomerDiscount(command.ProductId, command.DiscountRate, startDate
+            var account = _authHelper.CurrentAccountInfo();
+            if (account.Id < 0)
+                return operation.Failed(ApplicationMessages.RecordNotFound);
+
+
+            var CustomerDiscount = new CustomerDiscount(command.ProductId,account.Id, command.DiscountRate, startDate
                 , EndDate, command.Reason);
 
             _customerDiscountRepository.Create(CustomerDiscount);
@@ -48,7 +56,11 @@ namespace DiscountManagement.Application
             var startDate = command.StartDate.ToGeorgianDateTime();
             var EndDate = command.EndDate.ToGeorgianDateTime();
 
-            CustomerDiscount.Edit(command.ProductId, command.DiscountRate, startDate
+            var account = _authHelper.CurrentAccountInfo();
+            if (account.Id < 0)
+                return operation.Failed(ApplicationMessages.RecordNotFound);
+
+            CustomerDiscount.Edit(command.ProductId,account.Id, command.DiscountRate, startDate
                 , EndDate, command.Reason);
 
             _customerDiscountRepository.SaveChanges();

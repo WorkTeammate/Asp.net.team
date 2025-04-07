@@ -9,6 +9,7 @@ namespace _01_Framework.Infrastructure
     public static class Roles
     {
         public const string Admin = "1";
+        public const long AdminLong = 1;
         public const string User = "2";
         public const string BlogManager = "3";
         public const string Seller = "4";

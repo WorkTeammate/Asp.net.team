@@ -20,6 +20,7 @@ namespace ShopsManagement.Domain.ProductCategoryAgg
         public string MetaDescription { get; private set; }
         public string Slug { get; private set; }
         public bool IsDeleted { get; private set; }
+        public long AccountId { get; set; }
         public List<Products> Products { get; private set; }
 
         public ProductCategory()
@@ -28,7 +29,7 @@ namespace ShopsManagement.Domain.ProductCategoryAgg
         }
 
         public ProductCategory(string name, string shortDescription, string picture
-            , string pictureAlt, string pictureTitle, string keyWords, string metaDescription, string slug)
+            , string pictureAlt, string pictureTitle, string keyWords, string metaDescription, string slug,long accountId)
         {
             Name = name;
             ShortDescription = shortDescription;
@@ -41,6 +42,7 @@ namespace ShopsManagement.Domain.ProductCategoryAgg
             MetaDescription = metaDescription;
             Slug = slug;
             IsDeleted = false;
+            AccountId = accountId;
         }
         public void Edit(string name, string shortDescription, string picture
             , string pictureAlt, string pictureTitle, string keyWords, string metaDescription, string slug)

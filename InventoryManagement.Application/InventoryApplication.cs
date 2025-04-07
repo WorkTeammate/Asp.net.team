@@ -95,6 +95,9 @@ namespace InventoryManagement.Application
 
             var account = _authHelper.CurrentAccountId();
 
+            if (command.Count > inventory.CalculateCurrentCount())
+                return opration.Failed("مقدار نمیتواند بیشتر از موجودی انبار باشد");
+
             inventory.Reduce(command.Count, account, command.Description, 0);
             _inventoryRepository.SaveChanges();
             return opration.Successful();

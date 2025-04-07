@@ -1,5 +1,6 @@
 ﻿using _01_Framework.Application;
 using _01_Framework.Infrastructure;
+using AccountManagement.Infrastructure.EFCore;
 using DiscountManagement.Application.Contracts.CustomerDiscount;
 using DiscountManagement.Domain.CustomerDiscountAgg;
 using Microsoft.EntityFrameworkCore;
@@ -17,12 +18,15 @@ namespace DiscountManagement.Infrastructure.EFcore.Repository
     {
         private readonly DiscountContext _discountContext;
         private readonly ShopsContext _shopsContext;
+        private readonly AccountContext _accountContext;
 
 
-        public CustomerDiscountRepository(DiscountContext discountContext, ShopsContext shopsContext) : base(discountContext)
+        public CustomerDiscountRepository(DiscountContext discountContext
+            , ShopsContext shopsContext, AccountContext accountContext) : base(discountContext)
         {
             _discountContext = discountContext;
             _shopsContext = shopsContext;
+            _accountContext = accountContext;
         }
 
         public EditCustomerDiscount GetDetails(long Id)
@@ -41,6 +45,7 @@ namespace DiscountManagement.Infrastructure.EFcore.Repository
 
         public List<CustomerDiscountViewModel> Search(CustomerDiscountSearchModel searchModel)
         {
+            var Accounts = _accountContext.Account.Select(x => new { x.Id, x.Username }).ToList();
             var product = _shopsContext.Products.Select(x=>new {x.Id,x.Name }).ToList();
             var query = _discountContext.CustomerDiscount.Select(x => new CustomerDiscountViewModel
             {
@@ -53,6 +58,7 @@ namespace DiscountManagement.Infrastructure.EFcore.Repository
                 StartDate=x.StartDate.ToFarsi(),
                 StartDateGr= x.StartDate,
                 ProductId=x.ProductId,
+                AccountId=x.AccountId,
             });
             if (searchModel.ProductId > 0)
                 query = query.Where(x => x.ProductId == searchModel.ProductId);
@@ -72,6 +78,7 @@ namespace DiscountManagement.Infrastructure.EFcore.Repository
             discounts.ForEach(discount => 
             {
                 discount.Product = product.FirstOrDefault(x => x.Id == discount.ProductId)?.Name;
+                discount.Accounts = Accounts.FirstOrDefault(x => x.Id == discount.ProductId)?.Username;
             });
             return discounts;
 

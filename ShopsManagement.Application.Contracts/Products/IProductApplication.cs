@@ -16,5 +16,6 @@ namespace ShopsManagement.Application.Contracts.Products
         List<ProductViewModel> GetProducts();
         List<ProductViewModel> Search(ProductSearchModel searchModel);
         EditProduct GetDetails(long id);
+        OperationResult EditFileProduct(EditFileProduct command);
     }
 }

@@ -29,7 +29,7 @@ namespace ShopsManagement.Application
         public OperationResult CreateProduct(CreateProduct command)
         {
             var operation = new OperationResult();
-            if (_productRepository.Exists(x => x.Name == command.Name))
+            if (_productRepository.Exists(x => x.Name == command.Name && x.AccountId == command.AccountId))
                 return operation.Failed(ApplicationMessages.DuplicatedRecord);
 
             var slug = command.Slug.Slugify();
@@ -39,10 +39,12 @@ namespace ShopsManagement.Application
             var path = $"Product/{slug}";
             var picturePath = _fileUploader.Upload(command.Picture, path);
 
+            var pathFileProduct = $"Product/{slug}/Files";
+            var FileProductPath = _fileUploader.Upload(command.Picture, pathFileProduct);
 
             var product = new Products(command.Name, command.ShortDescription, command.Description,
                  picturePath, command.PictureAlt, command.PictureTitle, slug, command.Keywords,
-                 command.MetaDescription, command.CategoryId,command.AccountId);
+                 command.MetaDescription, command.CategoryId,command.AccountId , FileProductPath);
 
             _productRepository.Create(product);
             _productRepository.SaveChanges();
@@ -56,7 +58,7 @@ namespace ShopsManagement.Application
             if (product == null)
                 return operation.Failed(ApplicationMessages.RecordNotFound);
 
-            if (_productRepository.Exists(x => x.Name == command.Name && x.Id != command.Id))
+            if (_productRepository.Exists(x => x.Name == command.Name && x.Id != command.Id && x.AccountId ==command.AccountId))
                 return operation.Failed(ApplicationMessages.DuplicatedRecord);
 
             var slug = command.Slug.Slugify();
@@ -96,7 +98,6 @@ namespace ShopsManagement.Application
             return opration.Successful();
         }
 
-
         public EditProduct GetDetails(long id)
         {
             return _productRepository.GetDetails(id);
@@ -110,6 +111,22 @@ namespace ShopsManagement.Application
         public List<ProductViewModel> Search(ProductSearchModel searchModel)
         {
             return _productRepository.Search(searchModel);
+        }
+
+        public OperationResult EditFileProduct(EditFileProduct command)
+        {
+            var opration = new OperationResult();
+
+            var Product = _productRepository.Get(command.Id);
+            if (Product == null)
+                return opration.Failed(ApplicationMessages.RecordNotFound);
+
+            var pathFileProduct = $"Product/{Product.Slug}/Files";
+            var FileProductPath = _fileUploader.Upload(command.FileProduct, pathFileProduct);
+
+            Product.EditFileProduct(FileProductPath);
+            _productRepository.SaveChanges();
+            return opration.Successful();
         }
     }
 }

@@ -14,5 +14,7 @@
         public string CreationDate { get; set; }
         public long ProductsCount { get; set; }
         public bool IsDeleted { get; set; }
+        public long AccountId { get; set; }
+        public string Accounts { get; set; }
     }
 }

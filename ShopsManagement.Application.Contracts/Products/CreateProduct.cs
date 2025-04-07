@@ -31,6 +31,11 @@ namespace ShopsManagement.Application.Contracts.Products
         public List<ProductCategoryViewModel> Categories { get; set; }
         public long AccountId { get; set; }
 
+        [Required(ErrorMessage = ValidationMessages.IsRequired)]
+        [FileExtentionLimitation(new string[] { ".jpeg", ".jpg", ".png", "Pdf", "txt" }, ErrorMessage = ValidationMessages.InvalidFileFormat)]
+        [MaxFileSize(3 * 1024 * 1024, ErrorMessage = ValidationMessages.MaxFileSize)]
+        public IFormFile FileProduct { get; set; }
+
 
     }
 }
