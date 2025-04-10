@@ -36,38 +36,6 @@ namespace WeMarket.ServiceHost.Areas.Admin.Pages.ProductsManagement.Products
 
         }
 
-        public IActionResult OnGetCreate()
-        {
-            var account = _authHelper.CurrentAccountInfo();
-            if (account == null)
-                Message = ApplicationMessages.RecordNotFound;
-            var command = new CreateProduct
-            {
-                Categories = _productCategoryApplication.GetProductCategories(),
-                AccountId = account.Id
-            };
-            return Partial("./Create", command);
-        }
-        [NeedsPermission(ShopsPermissions.CreateProduct)]
-
-        public IActionResult OnPostCreate(CreateProduct command)
-        {
-            var account = _authHelper.CurrentAccountInfo();
-            if (account == null)
-                Message = ApplicationMessages.RecordNotFound;
-
-            command.AccountId = account.Id;
-
-            var result = _productApplication.CreateProduct(command);
-            if (result.IsSuccessful)
-            {
-                return new JsonResult(result);
-            }
-            Message = result.Message;
-            return Page();
-
-        }
-
         public IActionResult OnGetEdit(long id)
         {
             var Product = _productApplication.GetDetails(id);
@@ -97,6 +65,28 @@ namespace WeMarket.ServiceHost.Areas.Admin.Pages.ProductsManagement.Products
         public IActionResult OnPostEditFileProduct(EditFileProduct command) 
         {
             var result = _productApplication.EditFileProduct(command);
+            if (result.IsSuccessful)
+            {
+                return new JsonResult(result);
+            }
+            Message = result.Message;
+            return Page();
+        }
+
+        public IActionResult OnGetEditPictureProduct(long id)
+        {
+            var Product = _productApplication.GetDetails(id);
+            if (Product == null)
+                return Page();
+            var command = new EditPictureProduct()
+            {
+                Id = Product.Id,
+            };
+            return Partial("EditPictureProduct", command);
+        }
+        public IActionResult OnPostEditPictureProduct(EditPictureProduct command)
+        {
+            var result = _productApplication.EditPictureProduct(command);
             if (result.IsSuccessful)
             {
                 return new JsonResult(result);

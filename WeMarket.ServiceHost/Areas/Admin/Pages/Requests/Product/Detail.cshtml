@@ -1,0 +1,37 @@
+﻿@page
+@model WeMarket.ServiceHost.Areas.Admin.Pages.Requests.Product.DetailModel
+@{
+    Layout = "Shared/_Layout";
+}
+
+<div class="row">
+    <div class="col-md-12">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h3 class="panel-title">توضیحات محصول : @Model.Command.Name</h3>
+            </div>
+            <div class="panel-body">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="form-group no-margin">
+                                <label asp-for="@Model.Command.ShortDescription" class="control-label">توضیحات کوتاه</label>
+                                <textarea class="form-control autogrow" asp-for="@Model.Command.ShortDescription" onchange="fillField('ShortDescription', 'MetaDescription')"
+                                          style="overflow: hidden; word-wrap: break-word; resize: horizontal; height: 104px;"></textarea>
+                                <span asp-validation-for="@Model.Command.ShortDescription" class="error"></span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="form-group no-margin">
+                                <label asp-for="@Model.Command.Description" class="control-label">توضیحات</label>
+                                <textarea class="form-control" id="BodyContent" asp-for="@Model.Command.Description"></textarea>
+                                <span asp-validation-for="@Model.Command.Description" class="error"></span>
+                            </div>
+                        </div>
+                    </div>
+                    <a asp-page="./Index" class="btn btn-danger waves-effect waves-light m-b-5">بازگشت</a>
+            </div>
+        </div>
+    </div>
+</div>

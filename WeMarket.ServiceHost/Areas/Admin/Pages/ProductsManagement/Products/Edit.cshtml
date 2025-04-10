@@ -1,119 +1,94 @@
-﻿@using ShopsManagement.Application.Contracts.Products
-@model EditProduct
+﻿@page "{id:long}"
+@model WeMarket.ServiceHost.Areas.Admin.Pages.ProductsManagement.Products.Edit
 @{
+    Layout = "Shared/_Layout";
 }
 
-<div class="modal-header">
-    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-    <h4 class="modal-title">ویرایش محصول: @Model.Name</h4>
+<div class="row">
+    <div class="col-md-12">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h3 class="panel-title">ویرایش محصول : @Model.Command.Name</h3>
+            </div>
+            <div class="panel-body">
+                <form method="post" asp-route-id="@Model.Command.Id" asp-page="Edit">
+
+                    <div class="row">
+                        <div class="col-md-7">
+                            <div class="form-group">
+                                <label asp-for="@Model.Command.Name" class="control-label">نام</label>
+                                <input type="text" class="form-control" asp-for="@Model.Command.Name" onchange="makeSlug('Name', 'Slug')">
+                                <span asp-validation-for="@Model.Command.Name" class="error"></span>
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label asp-for="@Model.Command.CategoryId">گروه محصول</label>
+                                <select class="form-control" asp-for="@Model.Command.CategoryId" asp-items="Model.Category">
+                                    <option value="0">گروه محصولات ...</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label asp-for="@Model.Command.Keywords" class="control-label">کلمات کلیدی</label>
+                                <input type="text" class="form-control" asp-for="@Model.Command.Keywords">
+                                <span asp-validation-for="@Model.Command.Keywords" class="error"></span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label asp-for="@Model.Command.PictureAlt" class="control-label">Alt</label>
+                                <input type="text" class="form-control" asp-for="@Model.Command.PictureAlt">
+                                <span asp-validation-for="@Model.Command.PictureAlt" class="error"></span>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label asp-for="@Model.Command.PictureTitle" class="control-label">عنوان</label>
+                                <input type="text" class="form-control" asp-for="@Model.Command.PictureTitle">
+                                <span asp-validation-for="@Model.Command.PictureTitle" class="error"></span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="form-group no-margin">
+                                <label asp-for="@Model.Command.ShortDescription" class="control-label">توضیحات کوتاه</label>
+                                <textarea class="form-control autogrow" asp-for="@Model.Command.ShortDescription" onchange="fillField('ShortDescription', 'MetaDescription')"
+                                          style="overflow: hidden; word-wrap: break-word; resize: horizontal; height: 104px;" dir="rtl"></textarea>
+                                <span asp-validation-for="@Model.Command.ShortDescription" class="error"></span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="form-group no-margin">
+                                <label asp-for="@Model.Command.Description" class="control-label">توضیحات</label>
+                                <textarea class="form-control" id="BodyContent" asp-for="@Model.Command.Description" dir="rtl" dir="rtl"></textarea>
+                                <span asp-validation-for="@Model.Command.Description" class="error"></span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="form-group no-margin">
+                                <label asp-for="@Model.Command.MetaDescription" class="control-label">توضیحات متا</label>
+                                <textarea class="form-control autogrow" asp-for="@Model.Command.MetaDescription"
+                                          style="overflow: hidden; word-wrap: break-word; resize: horizontal; height: 104px;" dir="rtl"></textarea>
+                                <span asp-validation-for="@Model.Command.MetaDescription" class="error"></span>
+                            </div>
+                        </div>
+                    </div>
+                    <button type="submit" class="btn btn-success waves-effect waves-light m-b-5">ویرایش</button>
+                    <a asp-page="./Index" class="btn btn-dark waves-effect waves-light m-b-5">بازگشت</a>
+                </form>
+            </div>
+        </div>
+    </div>
 </div>
-
-<form asp-page="./Index" asp-page-handler="Edit"
-      method="post"
-      data-ajax="true"
-      data-callback=""
-      data-action="Refresh"
-      enctype="multipart/form-data">
-    <input type="hidden" name="Id" value="@Model.Id" />
-    <input type="hidden" name="AccountId" value="@Model.AccountId" />
-    <div class="modal-body">
-        <div class="row">
-            <div class="col-md-12">
-                <div class="form-group">
-                    <label asp-for="Name" class="control-label">نام محصول</label>
-                    <input type="text" class="form-control" asp-for="Name" onchange="makeSlug('Name', 'Slug')">
-                    <span asp-validation-for="Name" class="error"></span>
-                </div>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-md-12">
-                <div class="form-group">
-                    <label asp-for="CategoryId" class="control-label">گروه محصول</label>
-                    <select class="form-control" asp-for="CategoryId"
-                            asp-items='new SelectList(Model.Categories, "Id", "Name")'>
-                        <option value="0">گروه محصول</option>
-                    </select>
-                    <span asp-validation-for="CategoryId" class="error"></span>
-                </div>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-md-12">
-                <div class="form-group">
-                    <label asp-for="Picture" class="control-label">عکس</label>
-                    <input type="file" class="form-control" asp-for="Picture" accept="image/*">
-                    <span asp-validation-for="Picture" class="error"></span>
-                </div>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-md-6">
-                <div class="form-group">
-                    <label asp-for="PictureTitle" class="control-label">تایتل </label>
-                    <input type="text" class="form-control" asp-for="PictureTitle" onchange="fillField('PictureTitle', 'PictureAlt')">
-                    <span asp-validation-for="PictureTitle" class="error"></span>
-                </div>
-            </div>
-            <div class="col-md-6">
-                <div class="form-group">
-                    <label asp-for="PictureAlt" class="control-label">Alt</label>
-                    <input type="text" class="form-control" asp-for="PictureAlt">
-                    <span asp-validation-for="PictureAlt" class="error"></span>
-                </div>
-            </div>
-        </div>
-
-    </div>
-
-    <div class="row">
-        <div class="col-md-12">
-            <div class="form-group no-margin">
-                <label asp-for="ShortDescription" class="control-label">توضیحات کوتاه</label>
-                <textarea class="form-control autogrow" asp-for="ShortDescription" onchange="fillField('ShortDescription', 'MetaDescription')"
-                          style="overflow: hidden; word-wrap: break-word; resize: horizontal; height: 104px;"></textarea>
-                <span asp-validation-for="ShortDescription" class="error"></span>
-            </div>
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-md-12">
-            <div class="form-group no-margin">
-                <label asp-for="Description" class="control-label">توضیحات</label>
-                <textarea class="form-control autogrow" asp-for="Description"
-                          style="overflow: hidden; word-wrap: break-word; resize: horizontal; height: 104px;"></textarea>
-                <span asp-validation-for="Description" class="error"></span>
-            </div>
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-md-6">
-            <div class="form-group">
-                <label asp-for="Slug" class="control-label">اسلاگ</label>
-                <input type="text" class="form-control" asp-for="Slug">
-                <span asp-validation-for="Slug" class="error"></span>
-            </div>
-        </div>
-        <div class="col-md-6">
-            <div class="form-group">
-                <label asp-for="Keywords" class="control-label">کلمات کلیدی</label>
-                <input type="text" class="form-control" asp-for="Keywords">
-                <span asp-validation-for="Keywords" class="error"></span>
-            </div>
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-md-12">
-            <div class="form-group no-margin">
-                <label asp-for="MetaDescription" class="control-label">توضیحات متا</label>
-                <textarea class="form-control autogrow" asp-for="MetaDescription"
-                          style="overflow: hidden; word-wrap: break-word; resize: horizontal; height: 104px;"></textarea>
-                <span asp-validation-for="MetaDescription" class="error"></span>
-            </div>
-        </div>
-    </div>
-    <div class="modal-footer">
-        <button type="button" class="btn btn-default waves-effect" data-dismiss="modal">بستن</button>
-        <button type="submit" class="btn btn-info waves-effect waves-light">ویرایش</button>
-    </div>
-</form>

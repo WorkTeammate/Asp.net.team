@@ -50,14 +50,13 @@ namespace Market.ShopsManagement.Domain.ProductsAgg
             AccountId = accountId;
             FileProducts = fileproduct;
         }
-        public void Edit(string name, string shortDescription, string description, string picture,
+        public void Edit(string name, string shortDescription, string description,
             string pictureAlt, string pictureTitle, string slug
             , string keywords, string metaDescription, long categoryid , long accountId)
         {
             Name = name;
             ShortDescription = shortDescription;
             Description = description;
-            Picture = picture;
             PictureAlt = pictureAlt;
             PictureTitle = pictureTitle;
             Slug = slug;
@@ -65,6 +64,7 @@ namespace Market.ShopsManagement.Domain.ProductsAgg
             MetaDescription = metaDescription;
             CategoryId = categoryid;
             AccountId= accountId;
+            IsPublished= false;
         }
 
         public void Remove()
@@ -78,6 +78,12 @@ namespace Market.ShopsManagement.Domain.ProductsAgg
         public void EditFileProduct(string fileProduct)
         {
             FileProducts = fileProduct;
+            IsPublished=false;
+        }
+        public void EditPictureProduct(string picture)
+        {
+            Picture= picture;
+            IsPublished = false;
         }
         public void Published()
         {

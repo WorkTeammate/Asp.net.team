@@ -14,9 +14,11 @@ namespace ShopsManagement.Application.Contracts.Products
         OperationResult Delete(long id);
         OperationResult Restore(long id);
         OperationResult Published(long id);
+        OperationResult RejectProduct(long id);
         List<ProductViewModel> GetProducts();
         List<ProductViewModel> Search(ProductSearchModel searchModel);
         EditProduct GetDetails(long id);
         OperationResult EditFileProduct(EditFileProduct command);
+        OperationResult EditPictureProduct(EditPictureProduct command);
     }
 }

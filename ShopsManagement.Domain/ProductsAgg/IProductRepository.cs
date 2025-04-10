@@ -1,4 +1,5 @@
-﻿using _01_Framework.Domain;
+﻿using _01_Framework.Application;
+using _01_Framework.Domain;
 using Market.ShopsManagement.Domain.ProductsAgg;
 using ShopsManagement.Application.Contracts.Products;
 using System;
@@ -15,5 +16,6 @@ namespace ShopsManagement.Domain.ProductsAgg
         List<ProductViewModel> Search(ProductSearchModel searchModel);
         EditProduct GetDetails(long id);
         string GetSlugById(long id);
+        void Remove(Products products);
     }
 }

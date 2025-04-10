@@ -1,0 +1,36 @@
+﻿@using ShopsManagement.Application.Contracts.Products
+@model EditPictureProduct
+@{
+}
+
+<div class="modal-header">
+    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+    <h4 class="modal-title">ویرایش : @Model.Id</h4>
+</div>
+
+<form asp-page="./Index" asp-page-handler="EditPictureProduct"
+      method="post"
+      data-ajax="true"
+      data-callback=""
+      data-action="Refresh"
+      enctype="multipart/form-data">
+    <input type="hidden" name="Id" value="@Model.Id" />
+    <div class="modal-body">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="form-group">
+                    <label asp-for="PictureProduct" class="control-label">عکس محصول</label>
+                    <input type="file" class="form-control" asp-for="PictureProduct">
+                    <span asp-validation-for="PictureProduct" class="error"></span>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+
+    <div class="modal-footer">
+        <button type="button" class="btn btn-default waves-effect" data-dismiss="modal">بستن</button>
+        <button type="submit" class="btn btn-info waves-effect waves-light">ویرایش</button>
+    </div>
+</form>

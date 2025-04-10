@@ -2,6 +2,7 @@
 using _01_Framework.Infrastructure;
 using AccountManagement.Infrastructure.EFCore;
 using Market.ShopsManagement.Domain.ProductsAgg;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using ShopsManagement.Application.Contracts.Products;
 using ShopsManagement.Domain.ProductsAgg;
@@ -40,7 +41,7 @@ namespace ShopsManagement.Infrastructure.EFcore.Repository
                 PictureTitle = x.PictureTitle,
                 ShortDescription = x.ShortDescription,
                 Slug = x.Slug,
-                
+                AccountId=x.AccountId,
 
             }).OrderByDescending(x => x.Id).FirstOrDefault(x => x.Id == id);
 
@@ -75,6 +76,11 @@ namespace ShopsManagement.Infrastructure.EFcore.Repository
         public string GetSlugById(long id)
         {
             return _context.ProductCategory.Select(x => new { x.Id, x.Slug }).FirstOrDefault(x => x.Id == id).Slug;
+        }
+
+        public void Remove(Products product)
+        {
+           _context.Products.Remove(product);
         }
 
         public List<ProductViewModel> Search(ProductSearchModel searchModel)

@@ -1,4 +1,4 @@
-using _01_Framework.Application;
+﻿using _01_Framework.Application;
 using _01_Framework.Infrastructure;
 using InventoryManagement.Application.Contracts.Inventory;
 using Microsoft.AspNetCore.Mvc;
@@ -33,7 +33,6 @@ namespace WeMarket.ServiceHost.Areas.Admin.Pages.Requests.Product
         {
             ProductCategories = new SelectList(_productCategoryApplication.GetProductCategories(), "Id", "Name");
             Product = _productApplication.Search(searchModel);
-            Product.Where(x => x.IsPublished == false);
 
         }
 
@@ -43,6 +42,38 @@ namespace WeMarket.ServiceHost.Areas.Admin.Pages.Requests.Product
             if (!reault.IsSuccessful)
                 Message = reault.Message;
             return RedirectToPage("./Index");
+        }
+        public IActionResult OnGetDownload(string FileProduct)
+        {
+            
+            var filePath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", "AdminTheme", "UploadPicture", FileProduct);
+            if (!System.IO.File.Exists(filePath))
+            {
+                return NotFound(); // اگر فایل وجود نداشته باشد
+            }
+            var contentType = "application/octet-stream"; // نوع محتوا برای دانلود
+            return File(System.IO.File.ReadAllBytes(filePath), contentType, FileProduct);
+        }
+        public IActionResult OnGetReject(long id)
+        {
+            var reault = _productApplication.RejectProduct(id);
+            if (!reault.IsSuccessful)
+                Message = reault.Message;
+            return RedirectToPage("./Index");
+        }
+        public IActionResult OnGetDetails(long id)
+        {
+            var Product = _productApplication.GetDetails(id);
+            if (Product == null)
+                return Page();
+
+
+            var account = _authHelper.CurrentAccountInfo();
+            if (account == null)
+                Message = ApplicationMessages.RecordNotFound;
+
+            Product.AccountId = account.Id;
+            return Partial("Details", Product);
         }
     }
 }
